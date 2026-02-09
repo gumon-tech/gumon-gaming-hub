@@ -11,10 +11,6 @@ export default function Page() {
 
   return (
     <main className="page">
-      <div className="bgGrid" aria-hidden="true" />
-      <div className="bgGlow" aria-hidden="true" />
-      <div className="bgParticles" aria-hidden="true" />
-
       <header className="topbar">
         <div className="brand">
           <Image className="brandLogo" src="/logo.png" alt="Gumon Gaming Hub logo" width={34} height={34} />
@@ -33,7 +29,7 @@ export default function Page() {
 
       <section className="hero">
         <div className="heroMedia" aria-hidden="true">
-          <div className="heroImg" style={{ backgroundImage: `url(/images/hero-21x9-1920x823.jpg)` }} />
+          <div className="heroImg" style={{ backgroundImage: `url(/images/hero-21x9-1920x823.png)` }} />
           <div className="heroVignette" />
           <div className="heroScanlines" />
           <div className="heroDust" />
@@ -133,17 +129,7 @@ export default function Page() {
             <SocialShare title={shareTitle} text={shareText} />
           </div>
         </div>
-      </section>
-
-      <section className="section" id="gallery">
-        <div className="container">
-          <div className="sectionHead">
-            <h2 className="sectionTitle">World Moments</h2>
-            <p className="sectionDesc">คัดภาพบรรยากาศจากโลก Antlia: (Section ถูกลบตามคำขอ)</p>
-          </div>
-        </div>
-      </section>
-      
+      </section>      
 
       <section className="section">
         <div className="container">
@@ -182,6 +168,15 @@ export default function Page() {
                 <span className="compatTag">Bedrock</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="gallery">
+        <div className="container">
+          <div className="sectionHead">
+            <h2 className="sectionTitle">World Moments</h2>
+            <p className="sectionDesc">Coming Soon...</p>
           </div>
         </div>
       </section>

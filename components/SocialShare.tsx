@@ -101,10 +101,6 @@ export default function SocialShare({ title, text, url }: Props) {
           <span className={`dot ${copied ? "dotOk" : "dotCopy"}`} /> {copied ? "Copied!" : "Copy Link"}
         </button>
       </div>
-
-      <div className="shareHint">
-        * ภาพ/คำอธิบายตอนแชร์ไป Facebook/แพลตฟอร์มต่าง ๆ จะอิงจาก OG meta ใน <code>app/layout.tsx</code>
-      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+
 const siteName = "Gumon Gaming Hub — Antlia Server";
 const title = "Antlia Minecraft Server | Gumon Gaming Hub";
 const description =
