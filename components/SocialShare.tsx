@@ -75,29 +75,29 @@ export default function SocialShare({ title, text, url }: Props) {
     <div className="shareWrap">
       <div className="shareTop">
         <div className="shareTitle">Share</div>
-        <button className="btn btnGhost" onClick={onShareNative} type="button">
+        <button  className="btn btnGhost" data-magnet onClick={onShareNative} type="button">
           แชร์ (Native / Copy)
         </button>
       </div>
 
       <div className="shareGrid">
-        <a className="shareBtn" href={encoded.facebook} target="_blank" rel="noreferrer">
+        <a className="shareBtn" data-magnet href={encoded.facebook} target="_blank" rel="noreferrer">
           <span className="dot dotFb" /> Facebook
         </a>
-        <a className="shareBtn" href={encoded.x} target="_blank" rel="noreferrer">
+        <a className="shareBtn" data-magnet href={encoded.x} target="_blank" rel="noreferrer">
           <span className="dot dotX" /> X
         </a>
-        <a className="shareBtn" href={encoded.line} target="_blank" rel="noreferrer">
+        <a className="shareBtn" data-magnet href={encoded.line} target="_blank" rel="noreferrer">
           <span className="dot dotLine" /> LINE
         </a>
-        <a className="shareBtn" href={encoded.whatsapp} target="_blank" rel="noreferrer">
+        <a className="shareBtn" data-magnet href={encoded.whatsapp} target="_blank" rel="noreferrer">
           <span className="dot dotWa" /> WhatsApp
         </a>
-        <a className="shareBtn" href={encoded.linkedin} target="_blank" rel="noreferrer">
+        <a className="shareBtn" data-magnet href={encoded.linkedin} target="_blank" rel="noreferrer">
           <span className="dot dotIn" /> LinkedIn
         </a>
 
-        <button className="shareBtn" onClick={onCopy} type="button">
+        <button className="shareBtn" data-magnet onClick={onCopy} type="button">
           <span className={`dot ${copied ? "dotOk" : "dotCopy"}`} /> {copied ? "Copied!" : "Copy Link"}
         </button>
       </div>

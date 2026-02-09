@@ -28,9 +28,10 @@ export default function HeroActions({ inviteUrl }: Props) {
   }
 
   return (
-    <div className="ctaRow">
+    <div className="ctaRow reveal d3">
       <a
         className="btn btnPrimary btnBig btnShine"
+        data-magnet
         href={inviteUrl}
         target="_blank"
         rel="noreferrer"
@@ -38,7 +39,7 @@ export default function HeroActions({ inviteUrl }: Props) {
         REGISTER VIA DISCORD <span className="arrow">→</span>
       </a>
 
-      <button className="btn btnGhost btnBig" type="button" onClick={copyInvite}>
+      <button className="btn btnGhost btnBig" data-magnet type="button" onClick={copyInvite}>
         {copied ? "✓ COPIED!" : "COPY INVITE"}
       </button>
     </div>

@@ -3,6 +3,15 @@ import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
 import WorldMomentsGallery from "@/components/WorldMomentsGallery";
 import { WORLD_MOMENTS } from "@/lib/galleryImages";
+import ScrollTopbarEffect from "@/components/ScrollTopbarEffect";
+import ActiveNav from "@/components/ActiveNav";
+import ScrollReveal from "@/components/ScrollReveal";
+import LiveStatus from "@/components/LiveStatus";
+import TopbarFX from "@/components/TopbarFX";
+import SmoothNav from "@/components/SmoothNav";
+import MagneticFX from "@/components/MagneticFX";
+import HeroParallax from "@/components/HeroParallax";
+import FloatingCta from "@/components/FloatingCta";
 
 const DISCORD_INVITE = "https://discord.gg/WuNtDV9nTW";
 
@@ -13,6 +22,15 @@ export default function Page() {
 
   return (
     <main className="page">
+      <div className="noiseOverlay" aria-hidden="true" />
+
+      <TopbarFX />
+      <SmoothNav />
+      <MagneticFX />
+      <HeroParallax />
+      <ActiveNav ids={["highlights", "gallery"]} offset={96} />
+      <ScrollTopbarEffect />
+      <ScrollReveal />
       <header className="topbar">
         <div className="brand">
           <Image className="brandLogo" src="/logo.png" alt="Gumon Gaming Hub logo" width={34} height={34} />
@@ -23,10 +41,21 @@ export default function Page() {
         </div>
 
         <nav className="topActions">
-          <a className="btn btnGhost" href="#highlights">Highlights</a>
-          <a className="btn btnGhost" href="#howto">How to join</a>
-          <a className="btn btnPrimary btnPulse" href={DISCORD_INVITE} target="_blank" rel="noreferrer">JOIN DISCORD</a>
+          <a className="btn btnGhost" data-magnet data-nav="highlights" href="#highlights">Highlights</a>
+          <a className="btn btnGhost" data-magnet data-nav="gallery" href="#gallery">Gallery</a>
+          <a
+            className="btn btnPrimary btnPulse"
+            data-magnet
+            href={DISCORD_INVITE}
+            target="_blank"
+            rel="noreferrer"
+          >
+            JOIN DISCORD
+          </a>
         </nav>
+        <div className="topbarProgress" aria-hidden="true">
+          <span />
+        </div>
       </header>
 
       <section className="hero">
@@ -35,36 +64,43 @@ export default function Page() {
           <div className="heroVignette" />
           <div className="heroScanlines" />
           <div className="heroDust" />
+          <div className="heroSweep" />
         </div>
 
-        <div className="container heroInner">
+        <div className="container heroInner reveal">
           <div className="pillRow">
             <span className="pill"><span className="pillLed" /> FREE TO PLAY</span>
             <span className="pill">COMMUNITY</span>
             <span className="pill">LONG-TERM WORLD</span>
           </div>
 
-          <h1 className="heroTitle">
+          <h1 className="heroTitle reveal d1">
             Antlia <span className="heroTitleAccent">Minecraft Server</span>
           </h1>
 
-          <p className="heroLead">{shareText}</p>
+          <p className="heroLead reveal d2">{shareText}</p>
 
           <HeroActions inviteUrl={DISCORD_INVITE} />
+          <LiveStatus
+            discordUrl={DISCORD_INVITE}
+            serverLabel="Antlia"
+            hint="Join Discord to get IP + rules + updates"
+          />
 
-          <div className="inviteRow">
+          <div className="inviteRow reveal d4">
             <span className="inviteLabel">INVITE:</span>
-            <a className="inviteLink" href={DISCORD_INVITE} target="_blank" rel="noreferrer">{DISCORD_INVITE}</a>
+            <a className="inviteLink" data-magnet href={DISCORD_INVITE} target="_blank" rel="noreferrer">{DISCORD_INVITE}</a>
           </div>
 
-          <div className="chipRow">
+          <div className="chipRow reveal d5">
             <span className="chip">✦ Cozy + Epic Builds</span>
             <span className="chip">⛨ Fair Gameplay</span>
             <span className="chip">👥 Active Community</span>
           </div>
 
-          <div className="heroCards">
-            <div className="card cardTall" id="highlights">
+          <div id="highlights" className="anchor" />
+          <div className="heroCards reveal">
+            <div className="card cardTall">
               <div className="cardHead">
                 <div className="cardTitle">SERVER HIGHLIGHTS</div>
                 <div className="cardBadge"><Image src="/logo.png" alt="" width={26} height={26} /></div>
@@ -106,19 +142,19 @@ export default function Page() {
 
             <div className="card cardWide">
               <div className="stats">
-                <div className="stat">
+                <div className="stat" >
                   <div className="statLabel">FREE TO PLAY</div>
                   <div className="statValue glowText">100%</div>
                   <div className="statDesc">เล่นฟรี เข้าร่วมได้เลย</div>
                 </div>
 
-                <div className="stat">
+                <div className="stat" >
                   <div className="statLabel">REGISTER</div>
                   <div className="statValue">DISCORD</div>
                   <div className="statDesc">ลงทะเบียนและประกาศข่าวในที่เดียว</div>
                 </div>
 
-                <div className="stat">
+                <div className="stat" >
                   <div className="statLabel">WORLD</div>
                   <div className="statValue">LONG-TERM</div>
                   <div className="statDesc">เมืองโตขึ้นเรื่อย ๆ แบบมีเรื่องราว</div>
@@ -131,11 +167,11 @@ export default function Page() {
             <SocialShare title={shareTitle} text={shareText} />
           </div>
         </div>
-      </section>      
+      </section>
 
       <section className="section">
         <div className="container">
-          <div className="sectionHead">
+          <div className="sectionHead reveal">
             <h2 className="sectionTitle">Platform Support</h2>
             <p className="sectionDesc">
               เล่นได้ทุกแพลตฟอร์ม บน PC, Tablet, หรือมือถือก็ได้ เลือกได้ Java Edition หรือ Bedrock Edition
@@ -143,7 +179,7 @@ export default function Page() {
           </div>
 
           <div className="compatGrid">
-            <div className="compatCard">
+            <div className="compatCard reveal d1" data-magnet>
               <div className="compatIcon">💻</div>
               <div className="compatTitle">PC</div>
               <div className="compatDesc">Windows / Mac / Linux</div>
@@ -153,7 +189,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="compatCard">
+            <div className="compatCard reveal d2" data-magnet>
               <div className="compatIcon">📱</div>
               <div className="compatTitle">Mobile</div>
               <div className="compatDesc">iPhone / Android</div>
@@ -162,7 +198,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="compatCard">
+            <div className="compatCard reveal d3" data-magnet>
               <div className="compatIcon">⌨️</div>
               <div className="compatTitle">Tablet</div>
               <div className="compatDesc">iPad / Android Tablet</div>
@@ -174,11 +210,16 @@ export default function Page() {
         </div>
       </section>
 
+      <div className="container">
+        <div className="sectionDivider" aria-hidden="true" />
+      </div>
+
+
       <section className="section" id="gallery">
         <WorldMomentsGallery items={WORLD_MOMENTS} />
       </section>
 
-      <section className="section">
+      <section className="section reveal">
         <div className="container">
           <div className="finalCta">
             <div className="finalCtaCard">
@@ -189,8 +230,8 @@ export default function Page() {
                   กดเข้าดิสคอร์ดเพื่อสมัคร แล้วมาสร้างเมือง / สำรวจ / ผจญภัยด้วยกัน
                 </div>
               </div>
-              <a className="btn btnPrimary btnBig btnShine" href={DISCORD_INVITE} target="_blank" rel="noreferrer">
-                JOIN DISCORD <span className="arrow">→</span>
+              <a className="btn btnPrimary btnBig btnShine" data-magnet href={DISCORD_INVITE} target="_blank" rel="noreferrer">
+                START YOUR JOURNEY <span className="arrow">→</span>
               </a>
             </div>
           </div>
@@ -205,12 +246,13 @@ export default function Page() {
           <div className="footerRight">
             <a href={DISCORD_INVITE} target="_blank" rel="noreferrer">Discord</a>
             <span className="sep">•</span>
-            <a href="#highlights">Highlights</a>
+            <a data-nav="highlights" href="#highlights">Highlights</a>
             <span className="sep">•</span>
-            <a href="#howto">How to join</a>
+            <a data-nav="gallery" href="#gallery">Gallery</a>
           </div>
         </div>
       </footer>
+      <FloatingCta href={DISCORD_INVITE} />
     </main>
   );
 }

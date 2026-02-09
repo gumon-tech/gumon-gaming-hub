@@ -28,7 +28,7 @@ export default function WorldMomentsGallery({ items, className }: Props) {
 
   return (
     <div className={className}>
-      <div className="wmHeader">
+      <div className="wmHeader reveal">
         <div className="wmBadge">WORLD MOMENTS</div>
         <h2 className="wmTitle">Screenshots from Antlia</h2>
         <p className="wmSubtitle">
@@ -36,7 +36,7 @@ export default function WorldMomentsGallery({ items, className }: Props) {
         </p>
       </div>
 
-      <div className="wmMasonry" aria-label="World Moments gallery">
+      <div className="wmMasonry reveal d2" aria-label="World Moments gallery">
         {items.map((it, i) => (
           <button
             key={it.id}
@@ -58,7 +58,10 @@ export default function WorldMomentsGallery({ items, className }: Props) {
                 sizes="(max-width: 560px) 100vw, (max-width: 980px) 50vw, 25vw"
                 className="wmImg"
                 priority={i < 6}
+                loading={i < 6 ? "eager" : "lazy"}
+                decoding="async"
               />
+
               <div className="wmOverlay" />
               <div className="wmMeta">
                 <div className="wmMetaLine" />

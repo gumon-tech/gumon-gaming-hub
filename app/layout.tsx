@@ -55,9 +55,19 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="th">
-      <body>
-        {children}
-      </body>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-21x9-1920x823.png"
+          fetchPriority="high"
+        />
+        <link rel="preload" as="image" href="/images/gallery/world-moment-01-800x450.jpg" />
+        <link rel="preload" as="image" href="/images/gallery/world-moment-02-800x450.jpg" />
+        <link rel="preload" as="image" href="/images/gallery/world-moment-03-800x450.jpg" />
+
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
