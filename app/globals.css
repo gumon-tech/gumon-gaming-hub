@@ -927,3 +927,164 @@ code{font-family:var(--mono); color:#d7e7ff}
     rgba(0,0,0,.65) 100%
   );
 }
+
+/* ===== World Moments Gallery ===== */
+.wmHeader {
+  max-width: 980px;
+  margin: 0 auto 18px;
+  text-align: center;
+}
+
+.wmBadge {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.wmTitle {
+  margin: 14px 0 8px;
+  font-size: clamp(24px, 3.2vw, 40px);
+  line-height: 1.05;
+}
+
+.wmSubtitle {
+  margin: 0 auto;
+  max-width: 720px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+}
+
+/* Masonry via CSS columns: fast + cinematic */
+.wmMasonry {
+  column-count: 4;
+  column-gap: 14px;
+  max-width: 1200px;
+  margin: 18px auto 0;
+}
+
+@media (max-width: 1180px) {
+  .wmMasonry {
+    column-count: 3;
+  }
+}
+@media (max-width: 980px) {
+  .wmMasonry {
+    column-count: 2;
+    column-gap: 12px;
+  }
+}
+@media (max-width: 560px) {
+  .wmMasonry {
+    column-count: 1;
+    column-gap: 10px;
+  }
+}
+
+.wmCard {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  break-inside: avoid;
+  margin: 0 0 14px;
+  text-align: left;
+}
+
+.wmMedia {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  transform: translateZ(0);
+  /* ให้ความสูงแตกต่างกันแบบ cinematic (สุ่มด้วย pattern จาก nth-child) */
+  aspect-ratio: 16 / 10;
+}
+
+.wmCard:nth-child(3n) .wmMedia {
+  aspect-ratio: 4 / 5;
+}
+.wmCard:nth-child(5n) .wmMedia {
+  aspect-ratio: 21 / 9;
+}
+.wmCard:nth-child(7n) .wmMedia {
+  aspect-ratio: 1 / 1;
+}
+
+.wmImg {
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 420ms ease, filter 420ms ease;
+  filter: saturate(1.08) contrast(1.03);
+}
+
+.wmOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(255, 255, 255, 0.10), transparent 60%),
+    linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.55));
+  opacity: 0.85;
+  transition: opacity 420ms ease;
+}
+
+.wmMeta {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.wmMetaLine {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.35));
+  opacity: 0.65;
+}
+
+.wmMetaText {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.86);
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+}
+
+.wmDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+}
+
+.wmCard:hover .wmImg {
+  transform: scale(1.08);
+  filter: saturate(1.15) contrast(1.07);
+}
+.wmCard:hover .wmOverlay {
+  opacity: 0.70;
+}
+
+/* keyboard focus */
+.wmCard:focus-visible .wmMedia {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 3px;
+}

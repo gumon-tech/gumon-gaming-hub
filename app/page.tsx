@@ -1,6 +1,8 @@
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
+import WorldMomentsGallery from "@/components/WorldMomentsGallery";
+import { WORLD_MOMENTS } from "@/lib/galleryImages";
 
 const DISCORD_INVITE = "https://discord.gg/WuNtDV9nTW";
 
@@ -173,12 +175,7 @@ export default function Page() {
       </section>
 
       <section className="section" id="gallery">
-        <div className="container">
-          <div className="sectionHead">
-            <h2 className="sectionTitle">World Moments</h2>
-            <p className="sectionDesc">Coming Soon...</p>
-          </div>
-        </div>
+        <WorldMomentsGallery items={WORLD_MOMENTS} />
       </section>
 
       <section className="section">
