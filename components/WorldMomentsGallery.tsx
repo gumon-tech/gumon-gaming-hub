@@ -82,6 +82,9 @@ export default function WorldMomentsGallery({ items, className }: Props) {
         carousel={{ finite: false, preload: 2 }}
         controller={{ closeOnBackdropClick: true, closeOnPullDown: true }}
         animation={{ fade: 180, swipe: 220 }}
+        on={{
+          view: ({ index: i }) => setIndex(i),
+        }}
         zoom={{ maxZoomPixelRatio: 3, scrollToZoom: true }}
         toolbar={{
           buttons: [
