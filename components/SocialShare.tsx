@@ -14,8 +14,10 @@ export default function SocialShare({ title, text, url }: Props) {
 
   // ✅ Fix hydration mismatch: initialize URLs after mount
   useEffect(() => {
-    const finalUrl = url || window.location.href;
-    setShareUrl(finalUrl);
+    const finalUrl = url || (typeof window !== "undefined" ? window.location.href : "");
+    // avoid synchronous setState inside effect body
+    const t = setTimeout(() => setShareUrl(finalUrl), 0);
+    return () => clearTimeout(t);
   }, [url]);
 
   const encoded = useMemo(() => {
@@ -40,10 +42,9 @@ export default function SocialShare({ title, text, url }: Props) {
 
   async function onShareNative() {
     try {
-      // @ts-ignore
-      if (navigator.share) {
-        // @ts-ignore
-        await navigator.share({ title, text, url: shareUrl });
+      const nav = navigator as unknown as { share?: (data: { title?: string; text?: string; url?: string }) => Promise<void> };
+      if (nav.share) {
+        await nav.share({ title, text, url: shareUrl });
         return;
       }
       await onCopy();

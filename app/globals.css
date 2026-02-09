@@ -49,6 +49,19 @@ code{font-family:var(--mono); color:#d7e7ff}
   background-size: 64px 64px;
   opacity:.14;
   mask-image: radial-gradient(500px 300px at 30% 12%, rgba(0,0,0,1), rgba(0,0,0,.2) 60%, rgba(0,0,0,0) 100%);
+
+  /* Lightbox styles */
+  .lightboxOverlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:1000;
+  }
+  .lightboxContent{ position:relative; max-width:92%; max-height:92%; padding:18px; }
+  .lightboxImage{ display:block; max-height:76vh; overflow:hidden; border-radius:12px; }
+  .lightboxClose{ position:absolute; right:8px; top:8px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.06); color:var(--text); padding:6px 10px; border-radius:8px; }
+  .lightboxControls{ display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:12px; }
+  .lightboxPrev,.lightboxNext{ background:rgba(7,11,18,0.6); color:var(--text); border-radius:8px; padding:8px 12px; border:1px solid rgba(255,255,255,0.06); }
+  .lightboxCaption{ flex:1; text-align:center; color:var(--muted); }
+
+  .plainBtn{ background:none; border:0; padding:0; cursor:pointer; }
   pointer-events:none;
 }
 

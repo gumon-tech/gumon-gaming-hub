@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useMemo } from "react";
 
 export default function AuroraBackground() {
@@ -25,7 +24,7 @@ export default function AuroraBackground() {
   }, []);
 
   return (
-    <div className="pointer-events-none absolute inset-0">
+    <div className="pointer-events-none fixed inset-0 -z-10">
       {/* keep your grid */}
       <div className="absolute inset-0 opacity-20 pixel-grid" />
 

@@ -1,7 +1,7 @@
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
-import showcaseManifest from '../public/images/showcase/showcase-manifest.json';
-import galleryManifest from '../public/images/gallery/gallery-manifest.json';
+import Image from "next/image";
+import GalleryViewer from "@/components/GalleryViewer";
 
 const DISCORD_INVITE = "https://discord.gg/WuNtDV9nTW";
 
@@ -18,7 +18,7 @@ export default function Page() {
 
       <header className="topbar">
         <div className="brand">
-          <img className="brandLogo" src="/logo.png" alt="Gumon Gaming Hub logo" />
+          <Image className="brandLogo" src="/logo.png" alt="Gumon Gaming Hub logo" width={34} height={34} />
           <div className="brandText">
             <div className="brandName">GUMON GAMING HUB</div>
             <div className="brandSub">Antlia Server</div>
@@ -28,18 +28,13 @@ export default function Page() {
         <nav className="topActions">
           <a className="btn btnGhost" href="#highlights">Highlights</a>
           <a className="btn btnGhost" href="#howto">How to join</a>
-          <a className="btn btnPrimary btnPulse" href={DISCORD_INVITE} target="_blank" rel="noreferrer">
-            JOIN DISCORD
-          </a>
+          <a className="btn btnPrimary btnPulse" href={DISCORD_INVITE} target="_blank" rel="noreferrer">JOIN DISCORD</a>
         </nav>
       </header>
 
       <section className="hero">
         <div className="heroMedia" aria-hidden="true">
-          <div
-            className="heroImg"
-            style={{ backgroundImage: `url(/images/hero-21x9-1920x823.jpg)` }}
-          />
+          <div className="heroImg" style={{ backgroundImage: `url(/images/hero-21x9-1920x823.jpg)` }} />
           <div className="heroVignette" />
           <div className="heroScanlines" />
           <div className="heroDust" />
@@ -58,14 +53,11 @@ export default function Page() {
 
           <p className="heroLead">{shareText}</p>
 
-          {/* ✅ ปุ่มที่มี onClick ย้ายมาไว้ใน Client Component */}
           <HeroActions inviteUrl={DISCORD_INVITE} />
 
           <div className="inviteRow">
             <span className="inviteLabel">INVITE:</span>
-            <a className="inviteLink" href={DISCORD_INVITE} target="_blank" rel="noreferrer">
-              {DISCORD_INVITE}
-            </a>
+            <a className="inviteLink" href={DISCORD_INVITE} target="_blank" rel="noreferrer">{DISCORD_INVITE}</a>
           </div>
 
           <div className="chipRow">
@@ -78,9 +70,7 @@ export default function Page() {
             <div className="card cardTall" id="highlights">
               <div className="cardHead">
                 <div className="cardTitle">SERVER HIGHLIGHTS</div>
-                <div className="cardBadge">
-                  <img src="/logo.png" alt="" />
-                </div>
+                <div className="cardBadge"><Image src="/logo.png" alt="" width={26} height={26} /></div>
               </div>
 
               <div className="feature">
@@ -150,80 +140,11 @@ export default function Page() {
         <div className="container">
           <div className="sectionHead">
             <h2 className="sectionTitle">Gallery — World Moments</h2>
-            <p className="sectionDesc">คัดภาพบรรยากาศจากโลก Antlia: คลิกภาพเพื่อดูขนาดเต็ม</p>
-          </div>
-
-          <div className="showcaseGrid">
-            <div className="showcaseRow">
-              {showcaseManifest.slice(0,2).map((item, idx) => (
-                <div className="showcaseCol" key={item.id}>
-                  <a href={item.large} target="_blank" rel="noreferrer">
-                    <img src={item.large} alt={item.caption} className="showcaseLarge" />
-                  </a>
-                  <div className="showcaseCaption">{item.caption}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="showcaseThumbs">
-              {showcaseManifest.map((item) => (
-                <a key={item.id} href={item.large} target="_blank" rel="noreferrer">
-                  <img src={item.medium} alt={item.caption} className="thumb" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="fullGallery">
-            <h3 className="sectionSub">All Images</h3>
-            <p className="sectionDesc">ดูภาพทั้งหมดจากแกลเลอรีของเรา (คลิกเพื่อขยาย)</p>
-            <div className="gridCols">
-              {galleryManifest.map((g) => (
-                <a key={g.id} href={g.src} target="_blank" rel="noreferrer" className="gridItem">
-                  <img src={g.src} alt={g.caption} />
-                </a>
-              ))}
-            </div>
+            <p className="sectionDesc">คัดภาพบรรยากาศจากโลก Antlia: (Section ถูกลบตามคำขอ)</p>
           </div>
         </div>
       </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="sectionHead">
-            <h2 className="sectionTitle">World Moments</h2>
-            <p className="sectionDesc">
-              ภาพบรรยากาศในโลก Antlia — แนะนำใช้ภาพ 16:9 เป็น OG/แชร์ และ 21:9 เป็น Hero Banner
-            </p>
-          </div>
-
-          <div className="gallery">
-            <div className="shot shotMain">
-              <div className="shotImg" style={{ backgroundImage: "url(/images/hero-16x9-1920x1080.jpg)" }} />
-              <div className="shotOverlay">
-                <div className="shotTitle">Featured View</div>
-                <div className="shotSub">ปราสาท • ประตู Nether • ดินแดนลึกลับ</div>
-              </div>
-            </div>
-
-            <div className="shot shotSide">
-              <div className="shotImg" style={{ backgroundImage: "url(/images/hero-square-1024.jpg)" }} />
-              <div className="shotOverlay">
-                <div className="shotTitle">Icon View</div>
-                <div className="shotSub">OG / Thumbnail / Card</div>
-              </div>
-            </div>
-
-            <div className="shot shotSide">
-              <div className="shotImg" style={{ backgroundImage: "url(/images/hero-4x5-1080x1350.jpg)" }} />
-              <div className="shotOverlay">
-                <div className="shotTitle">Mobile View</div>
-                <div className="shotSub">Portrait / Social Story</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       <section className="section">
         <div className="container">

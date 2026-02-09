@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AuroraBackground from "@/components/AuroraBackground";
 
 const siteName = "Gumon Gaming Hub — Antlia Server";
 const title = "Antlia Minecraft Server | Gumon Gaming Hub";
@@ -44,14 +45,18 @@ export const metadata: Metadata = {
     description,
     images: ["/images/hero-16x9-1920x1080.jpg"]
   },
+};
 
-  themeColor: "#0b1220"
+// Move themeColor to viewport export to satisfy Next.js metadata requirements
+export const viewport = {
+  themeColor: "#0b1220",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="th">
       <body>
+        <AuroraBackground />
         {children}
       </body>
     </html>
