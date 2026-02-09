@@ -989,6 +989,23 @@ code{font-family:var(--mono); color:#d7e7ff}
   }
 }
 
+/* mobile caption: ไม่กินจอ + scroll ได้ */
+@media (max-width: 768px) {
+  .wmInfoPanel {
+    max-height: 32vh;
+    overflow: auto;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  }
+}
+
+@media (max-width: 768px) {
+  .yarl__slide_image {
+    max-height: 88vh;
+    object-fit: contain;
+  }
+}
+
+
 .wmCard {
   width: 100%;
   border: 0;
@@ -1087,4 +1104,105 @@ code{font-family:var(--mono); color:#d7e7ff}
 .wmCard:focus-visible .wmMedia {
   outline: 2px solid rgba(255, 255, 255, 0.55);
   outline-offset: 3px;
+}
+
+/* ========== Lightbox toolbar button ========== */
+.wmToolbarBtn{
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.92);
+  font-size: 13px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+.wmToolbarBtn:hover{
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* ========== Caption positioning wrapper ========== */
+/* Lightbox จะ render caption ใส่ container ของมันเอง เราเอา root ของเราไปจัดตำแหน่ง */
+.wmCaptionRoot{
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* ให้ swipe/zoom ลื่น */
+}
+
+/* ========== Desktop: side panel glass card ========== */
+.wmInfoPanel{
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(420px, 92vw);
+
+  padding: 16px 18px;
+  border-radius: 18px;
+
+  background:
+    radial-gradient(420px 180px at 20% 0%, rgba(52,211,153,.14), transparent 60%),
+    radial-gradient(420px 180px at 85% 10%, rgba(168,85,247,.12), transparent 60%),
+    rgba(12, 18, 32, 0.70);
+
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+  backdrop-filter: blur(14px);
+
+  /* อ่านง่ายขึ้น */
+  text-align: left;
+}
+
+.wmInfoKicker{
+  font-family: var(--mono);
+  letter-spacing: .18em;
+  font-size: 11px;
+  color: rgba(255,255,255,0.68);
+  margin-bottom: 10px;
+}
+
+.wmInfoTitle{
+  margin: 0 0 8px;
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.wmInfoDesc{
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.82);
+}
+
+/* ===== Make sure caption container is visible ===== */
+.yarl__caption{
+  /* ไม่ต้องซ่อน */
+}
+
+/* ========== Mobile: bottom-sheet (สวย + ไม่รก) ========== */
+@media (max-width: 768px){
+  .wmInfoPanel{
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
+    transform: none;
+    width: auto;
+
+    padding: 14px 14px;
+    border-radius: 18px;
+
+    max-height: 34vh;
+    overflow: auto;
+  }
+
+  .wmInfoTitle{ font-size: 18px; }
+  .wmInfoDesc{ font-size: 14px; line-height: 1.65; }
+}
+
+/* ========== Toolbar safe-area ========== */
+.yarl__toolbar{
+  padding-top: calc(env(safe-area-inset-top, 0px) + 10px) !important;
 }
