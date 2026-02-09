@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import AuroraBackground from "@/components/AuroraBackground";
 
 const siteName = "Gumon Gaming Hub — Antlia Server";
 const title = "Antlia Minecraft Server | Gumon Gaming Hub";
@@ -56,7 +55,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="th">
       <body>
-        <AuroraBackground />
         {children}
       </body>
     </html>

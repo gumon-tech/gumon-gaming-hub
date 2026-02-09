@@ -1,7 +1,6 @@
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
-import GalleryViewer from "@/components/GalleryViewer";
 
 const DISCORD_INVITE = "https://discord.gg/WuNtDV9nTW";
 
@@ -139,7 +138,7 @@ export default function Page() {
       <section className="section" id="gallery">
         <div className="container">
           <div className="sectionHead">
-            <h2 className="sectionTitle">Gallery — World Moments</h2>
+            <h2 className="sectionTitle">World Moments</h2>
             <p className="sectionDesc">คัดภาพบรรยากาศจากโลก Antlia: (Section ถูกลบตามคำขอ)</p>
           </div>
         </div>
