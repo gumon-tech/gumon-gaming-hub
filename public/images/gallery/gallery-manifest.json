@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "src": "/images/gallery/gallery-01.png",
+    "caption": "Antlia 1"
+  },
+  {
+    "id": 2,
+    "src": "/images/gallery/gallery-02.png",
+    "caption": "Antlia 2"
+  },
+  {
+    "id": 3,
+    "src": "/images/gallery/gallery-03.png",
+    "caption": "Antlia 3"
+  }
+]

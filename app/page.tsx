@@ -1,5 +1,7 @@
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
+import showcaseManifest from '../public/images/showcase/showcase-manifest.json';
+import galleryManifest from '../public/images/gallery/gallery-manifest.json';
 
 const DISCORD_INVITE = "https://discord.gg/WuNtDV9nTW";
 
@@ -36,7 +38,7 @@ export default function Page() {
         <div className="heroMedia" aria-hidden="true">
           <div
             className="heroImg"
-            style={{ backgroundImage: `url(/images/minecraft-castle-featured.jpg)` }}
+            style={{ backgroundImage: `url(/images/hero-21x9-1920x823.jpg)` }}
           />
           <div className="heroVignette" />
           <div className="heroScanlines" />
@@ -144,6 +146,48 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="section" id="gallery">
+        <div className="container">
+          <div className="sectionHead">
+            <h2 className="sectionTitle">Gallery — World Moments</h2>
+            <p className="sectionDesc">คัดภาพบรรยากาศจากโลก Antlia: คลิกภาพเพื่อดูขนาดเต็ม</p>
+          </div>
+
+          <div className="showcaseGrid">
+            <div className="showcaseRow">
+              {showcaseManifest.slice(0,2).map((item, idx) => (
+                <div className="showcaseCol" key={item.id}>
+                  <a href={item.large} target="_blank" rel="noreferrer">
+                    <img src={item.large} alt={item.caption} className="showcaseLarge" />
+                  </a>
+                  <div className="showcaseCaption">{item.caption}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className="showcaseThumbs">
+              {showcaseManifest.map((item) => (
+                <a key={item.id} href={item.large} target="_blank" rel="noreferrer">
+                  <img src={item.medium} alt={item.caption} className="thumb" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="fullGallery">
+            <h3 className="sectionSub">All Images</h3>
+            <p className="sectionDesc">ดูภาพทั้งหมดจากแกลเลอรีของเรา (คลิกเพื่อขยาย)</p>
+            <div className="gridCols">
+              {galleryManifest.map((g) => (
+                <a key={g.id} href={g.src} target="_blank" rel="noreferrer" className="gridItem">
+                  <img src={g.src} alt={g.caption} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section">
         <div className="container">
           <div className="sectionHead">
@@ -155,7 +199,7 @@ export default function Page() {
 
           <div className="gallery">
             <div className="shot shotMain">
-              <div className="shotImg" style={{ backgroundImage: "url(/images/minecraft-castle-featured.jpg)" }} />
+              <div className="shotImg" style={{ backgroundImage: "url(/images/hero-16x9-1920x1080.jpg)" }} />
               <div className="shotOverlay">
                 <div className="shotTitle">Featured View</div>
                 <div className="shotSub">ปราสาท • ประตู Nether • ดินแดนลึกลับ</div>
@@ -163,7 +207,7 @@ export default function Page() {
             </div>
 
             <div className="shot shotSide">
-              <div className="shotImg" style={{ backgroundImage: "url(/images/minecraft-tower-icon.jpg)" }} />
+              <div className="shotImg" style={{ backgroundImage: "url(/images/hero-square-1024.jpg)" }} />
               <div className="shotOverlay">
                 <div className="shotTitle">Icon View</div>
                 <div className="shotSub">OG / Thumbnail / Card</div>
@@ -171,7 +215,7 @@ export default function Page() {
             </div>
 
             <div className="shot shotSide">
-              <div className="shotImg" style={{ backgroundImage: "url(/images/minecraft-world-mobile.jpg)" }} />
+              <div className="shotImg" style={{ backgroundImage: "url(/images/hero-4x5-1080x1350.jpg)" }} />
               <div className="shotOverlay">
                 <div className="shotTitle">Mobile View</div>
                 <div className="shotSub">Portrait / Social Story</div>
