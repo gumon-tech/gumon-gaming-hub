@@ -7,18 +7,12 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import type { WorldMoment } from "@/lib/galleryImages";
-import Captions from "yet-another-react-lightbox/plugins/captions";
 
-type Props = {
-  items: WorldMoment[];
-  className?: string;
-};
+type Props = { items: WorldMoment[]; className?: string };
 
 export default function WorldMomentsGallery({ items, className }: Props) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
-
-  // ✅ Default = เปิดคำอธิบาย
   const [showInfo, setShowInfo] = useState(true);
 
   const slides = useMemo(
@@ -27,6 +21,7 @@ export default function WorldMomentsGallery({ items, className }: Props) {
         src: `/images/gallery/${it.full}`,
         title: it.title,
         description: it.description,
+        alt: it.alt,
       })),
     [items]
   );
@@ -50,9 +45,9 @@ export default function WorldMomentsGallery({ items, className }: Props) {
             onClick={() => {
               setIndex(i);
               setOpen(true);
-              setShowInfo(true); // เปิดทุกครั้งที่เปิดภาพ (ถ้าอยากให้จำค่าผู้ใช้ เอาบรรทัดนี้ออก)
+              setShowInfo(true);
             }}
-            aria-label={`Open image ${it.id}`}
+            aria-label={`Open image ${it.title}`}
             title={`${it.title} — ${it.description}`}
           >
             <div className="wmMedia">
@@ -65,8 +60,6 @@ export default function WorldMomentsGallery({ items, className }: Props) {
                 priority={i < 6}
               />
               <div className="wmOverlay" />
-
-              {/* ✅ เปลี่ยนเลขเป็นชื่อภาพ (ตามที่คุณขอในภาพที่ 2) */}
               <div className="wmMeta">
                 <div className="wmMetaLine" />
                 <div className="wmMetaText">
@@ -89,46 +82,48 @@ export default function WorldMomentsGallery({ items, className }: Props) {
         carousel={{ finite: false, preload: 2 }}
         controller={{ closeOnBackdropClick: true, closeOnPullDown: true }}
         animation={{ fade: 180, swipe: 220 }}
+        zoom={{ maxZoomPixelRatio: 3, scrollToZoom: true }}
+        toolbar={{
+          buttons: [
+            "zoom",
+            <button
+              key="toggle-info"
+              type="button"
+              className="wmToolbarBtn"
+              onClick={() => setShowInfo((v) => !v)}
+              aria-label={showInfo ? "Hide description" : "Show description"}
+              title={showInfo ? "Hide info" : "Show info"}
+            >
+              {showInfo ? "Hide info" : "Show info"}
+            </button>,
+            "close",
+          ],
+        }}
         render={{
-          // ✅ ตรงนี้แหละ: ปุ่ม Toggle เอาไว้ "ทับ" อยู่บนสไลด์
-          slide: ({ slide }) => (
-            <div className="wmLightboxSlide">
-              <img
-                src={slide.src}
-                alt={slide.title ?? "World Moment"}
-                className="wmLightboxImage"
-              />
+          controls: (props) => {
+            if (!open || !showInfo) return null;
 
-              {/* ✅ ปุ่ม Toggle คำอธิบาย (มุมขวาบน) */}
-              <button
-                type="button"
-                className="wmToggleInfo"
-                onClick={() => setShowInfo((v) => !v)}
-                aria-label={showInfo ? "Hide description" : "Show description"}
-              >
-                {showInfo ? "Hide info" : "Show info"}
-              </button>
+            // YARL บางเวอร์ชันไม่ส่ง slide มาใน controls
+            const s =
+              (props as any)?.slide ??
+              (props as any)?.currentSlide ??
+              (slides[index] as any);
 
-              {/* ✅ ปุ่มปิด (มุมขวาบน) - optional แต่แนะนำให้สวยและชัด */}
-              <button
-                type="button"
-                className="wmClose"
-                onClick={() => setOpen(false)}
-                aria-label="Close"
-                title="Close"
-              >
-                ✕
-              </button>
+            const title = s?.title ?? "";
+            const description = s?.description ?? "";
+            if (!title && !description) return null;
 
-              {/* ✅ Panel คำอธิบาย */}
-              {showInfo && (
+            return (
+              <div className="wmCaptionRoot">
                 <div className="wmInfoPanel" role="note" aria-label="Image description">
-                  <h3 className="wmInfoTitle">{slide.title}</h3>
-                  <p className="wmInfoDesc">{slide.description}</p>
+                  <div className="wmInfoKicker">WORLD MOMENT</div>
+                  {title ? <h3 className="wmInfoTitle">{title}</h3> : null}
+                  {description ? <p className="wmInfoDesc">{description}</p> : null}
                 </div>
-              )}
-            </div>
-          ),
+              </div>
+            );
+          }
+
         }}
       />
     </div>

@@ -963,7 +963,7 @@ code{font-family:var(--mono); color:#d7e7ff}
   font-size: 15px;
 }
 
-/* Masonry via CSS columns: fast + cinematic */
+/* Masonry via CSS columns */
 .wmMasonry {
   column-count: 4;
   column-gap: 14px;
@@ -989,23 +989,6 @@ code{font-family:var(--mono); color:#d7e7ff}
   }
 }
 
-/* mobile caption: ไม่กินจอ + scroll ได้ */
-@media (max-width: 768px) {
-  .wmInfoPanel {
-    max-height: 32vh;
-    overflow: auto;
-    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
-  }
-}
-
-@media (max-width: 768px) {
-  .yarl__slide_image {
-    max-height: 88vh;
-    object-fit: contain;
-  }
-}
-
-
 .wmCard {
   width: 100%;
   border: 0;
@@ -1025,19 +1008,12 @@ code{font-family:var(--mono); color:#d7e7ff}
   background: rgba(255, 255, 255, 0.03);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
   transform: translateZ(0);
-  /* ให้ความสูงแตกต่างกันแบบ cinematic (สุ่มด้วย pattern จาก nth-child) */
   aspect-ratio: 16 / 10;
 }
 
-.wmCard:nth-child(3n) .wmMedia {
-  aspect-ratio: 4 / 5;
-}
-.wmCard:nth-child(5n) .wmMedia {
-  aspect-ratio: 21 / 9;
-}
-.wmCard:nth-child(7n) .wmMedia {
-  aspect-ratio: 1 / 1;
-}
+.wmCard:nth-child(3n) .wmMedia { aspect-ratio: 4 / 5; }
+.wmCard:nth-child(5n) .wmMedia { aspect-ratio: 21 / 9; }
+.wmCard:nth-child(7n) .wmMedia { aspect-ratio: 1 / 1; }
 
 .wmImg {
   object-fit: cover;
@@ -1100,7 +1076,6 @@ code{font-family:var(--mono); color:#d7e7ff}
   opacity: 0.70;
 }
 
-/* keyboard focus */
 .wmCard:focus-visible .wmMedia {
   outline: 2px solid rgba(255, 255, 255, 0.55);
   outline-offset: 3px;
@@ -1122,22 +1097,22 @@ code{font-family:var(--mono); color:#d7e7ff}
   border-color: rgba(255,255,255,0.22);
 }
 
-/* ========== Caption positioning wrapper ========== */
-/* Lightbox จะ render caption ใส่ container ของมันเอง เราเอา root ของเราไปจัดตำแหน่ง */
+/* ========== Caption overlay root (สำคัญ) ========== */
+/* เราวาง panel แบบ overlay แต่ไม่กัน gesture zoom/swipe */
 .wmCaptionRoot{
-  position: absolute;
+  position: fixed;
   inset: 0;
-  pointer-events: none; /* ให้ swipe/zoom ลื่น */
+  z-index: 9999; 
+  pointer-events: none;
 }
 
-/* ========== Desktop: side panel glass card ========== */
+/* Desktop: side panel */
 .wmInfoPanel{
   position: absolute;
   right: 18px;
   top: 50%;
   transform: translateY(-50%);
   width: min(420px, 92vw);
-
   padding: 16px 18px;
   border-radius: 18px;
 
@@ -1149,8 +1124,6 @@ code{font-family:var(--mono); color:#d7e7ff}
   border: 1px solid rgba(255,255,255,0.14);
   box-shadow: 0 22px 70px rgba(0,0,0,0.55);
   backdrop-filter: blur(14px);
-
-  /* อ่านง่ายขึ้น */
   text-align: left;
 }
 
@@ -1176,12 +1149,7 @@ code{font-family:var(--mono); color:#d7e7ff}
   color: rgba(255,255,255,0.82);
 }
 
-/* ===== Make sure caption container is visible ===== */
-.yarl__caption{
-  /* ไม่ต้องซ่อน */
-}
-
-/* ========== Mobile: bottom-sheet (สวย + ไม่รก) ========== */
+/* Mobile: bottom sheet */
 @media (max-width: 768px){
   .wmInfoPanel{
     left: 12px;
@@ -1191,9 +1159,6 @@ code{font-family:var(--mono); color:#d7e7ff}
     transform: none;
     width: auto;
 
-    padding: 14px 14px;
-    border-radius: 18px;
-
     max-height: 34vh;
     overflow: auto;
   }
@@ -1202,7 +1167,15 @@ code{font-family:var(--mono); color:#d7e7ff}
   .wmInfoDesc{ font-size: 14px; line-height: 1.65; }
 }
 
-/* ========== Toolbar safe-area ========== */
+/* Toolbar safe-area */
 .yarl__toolbar{
   padding-top: calc(env(safe-area-inset-top, 0px) + 10px) !important;
+}
+
+/* มือถือ: คุมความสูงรูปให้เหลือที่ให้ caption */
+@media (max-width: 768px) {
+  .yarl__slide_image {
+    max-height: 88vh;
+    object-fit: contain;
+  }
 }
