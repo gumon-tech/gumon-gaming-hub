@@ -15,7 +15,7 @@ import MagneticFX from "@/components/MagneticFX";
 import HeroParallax from "@/components/HeroParallax";
 import FloatingCta from "@/components/FloatingCta";
 
-const DISCORD_INVITE = process.env.NEXT_PUBLIC_DISCORD_INVITE;
+const DISCORD_INVITE = process.env.NEXT_PUBLIC_DISCORD_INVITE || "";
 
 const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
