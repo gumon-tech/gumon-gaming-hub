@@ -106,31 +106,34 @@ export default function WorldMomentsGallery({ items, className }: Props) {
           ],
         }}
         render={{
-          controls: (props) => {
+          controls: () => {
             if (!open || !showInfo) return null;
 
-            // YARL บางเวอร์ชันไม่ส่ง slide มาใน controls
-            const s =
-              (props as any)?.slide ??
-              (props as any)?.currentSlide ??
-              (slides[index] as any);
+            const s = slides[index];
+            if (!s) return null;
 
-            const title = s?.title ?? "";
-            const description = s?.description ?? "";
+            const title = s.title ?? "";
+            const description = s.description ?? "";
             if (!title && !description) return null;
 
             return (
               <div className="wmCaptionRoot">
-                <div className="wmInfoPanel" role="note" aria-label="Image description">
+                <div
+                  className="wmInfoPanel"
+                  role="note"
+                  aria-label="Image description"
+                >
                   <div className="wmInfoKicker">WORLD MOMENT</div>
                   {title ? <h3 className="wmInfoTitle">{title}</h3> : null}
-                  {description ? <p className="wmInfoDesc">{description}</p> : null}
+                  {description ? (
+                    <p className="wmInfoDesc">{description}</p>
+                  ) : null}
                 </div>
               </div>
             );
-          }
-
+          },
         }}
+
       />
     </div>
   );
