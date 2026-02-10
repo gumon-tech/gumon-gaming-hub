@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SHARE_TITLE, SHARE_DESCRIPTION } from "@/lib/seo";
+import { SHARE_TITLE, SHARE_DESCRIPTION, ORG_NAME,SITE_NAME } from "@/lib/seo";
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
@@ -333,7 +333,7 @@ export default function Page() {
         <div className="container footerInner">
           <div className="footerLeft">
             <span>
-              © {new Date().getFullYear()} GUMON GAMING HUB • ANTILIA SERVER
+              © {new Date().getFullYear()} {ORG_NAME} • {SITE_NAME}
             </span>
           </div>
           <div className="footerRight">

@@ -1,8 +1,8 @@
 export const ORG_NAME = "Gumon Technology";
 
-export const SITE_NAME = "Gumon Gaming Hub - Antlia Server";
+export const SITE_NAME = "Gumon Gaming Hub • Antlia Server";
 
-export const SHARE_TITLE = "Antlia Minecraft Server (Java & Bedrock) — Gumon Gaming Hub";
+export const SHARE_TITLE = "Antlia Minecraft Server (Java & Bedrock) • Gumon Gaming Hub";
 
 export const SHARE_DESCRIPTION = "เล่นฟรี • Community Minecraft Server • Long-term World • รองรับ Java & Bedrock - สมัครผ่าน Discord เพื่อรับ IP + กติกาได้เลย!";
 
