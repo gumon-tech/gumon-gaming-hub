@@ -13,7 +13,7 @@ import MagneticFX from "@/components/MagneticFX";
 import HeroParallax from "@/components/HeroParallax";
 import FloatingCta from "@/components/FloatingCta";
 
-const DISCORD_INVITE = "https://discord.gg/WuNtDV9nTW";
+const DISCORD_INVITE = process.env.NEXT_PUBLIC_DISCORD_INVITE
 
 export default function Page() {
   const shareTitle = "Antlia Minecraft Server | Gumon Gaming Hub";
