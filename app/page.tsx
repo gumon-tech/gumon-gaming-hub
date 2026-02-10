@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
@@ -13,13 +15,58 @@ import MagneticFX from "@/components/MagneticFX";
 import HeroParallax from "@/components/HeroParallax";
 import FloatingCta from "@/components/FloatingCta";
 
-const DISCORD_INVITE = process.env.NEXT_PUBLIC_DISCORD_INVITE
+const DISCORD_INVITE = process.env.NEXT_PUBLIC_DISCORD_INVITE;
 
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "http://localhost:3000";
+
+const shareTitle = "Antlia Minecraft Server | Gumon Gaming Hub";
+const shareDescription =
+  "เล่นฟรี • Community • Long-term World — สมัครผ่าน Discord แล้วเข้ามาสร้างเมือง/ผจญภัยด้วยกัน!";
+
+/* =========================
+   Metadata (Homepage OG)
+========================= */
+export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
+  title: shareTitle,
+  description: shareDescription,
+
+  openGraph: {
+    type: "website",
+    url: baseUrl,
+    title: shareTitle,
+    description: shareDescription,
+    images: [
+      {
+        url: "/images/og/og-facebook-gumon-game-text-sub.png",
+        width: 1200,
+        height: 630,
+        alt: "Antlia Minecraft Server — Community • Java & Bedrock",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: shareTitle,
+    description: shareDescription,
+    images: [
+      {
+        url: "/images/og/og-x-antlia-minecraft.png",
+        width: 1200,
+        height: 675,
+        alt: "Antlia Minecraft Server",
+      },
+    ],
+  },
+};
+
+/* =========================
+   Page Component
+========================= */
 export default function Page() {
-  const shareTitle = "Antlia Minecraft Server | Gumon Gaming Hub";
-  const shareText =
-    "เล่นฟรี • Community • Long-term World — สมัครผ่าน Discord แล้วเข้ามาสร้างเมือง/ผจญภัยด้วยกัน!";
-
   return (
     <main className="page">
       <div className="noiseOverlay" aria-hidden="true" />
@@ -31,9 +78,17 @@ export default function Page() {
       <ActiveNav ids={["highlights", "gallery"]} offset={96} />
       <ScrollTopbarEffect />
       <ScrollReveal />
+
+      {/* ================= Topbar ================= */}
       <header className="topbar">
         <div className="brand">
-          <Image className="brandLogo" src="/logo.png" alt="Gumon Gaming Hub logo" width={34} height={34} />
+          <Image
+            className="brandLogo"
+            src="/logo.png"
+            alt="Gumon Gaming Hub logo"
+            width={34}
+            height={34}
+          />
           <div className="brandText">
             <div className="brandName">GUMON GAMING HUB</div>
             <div className="brandSub">Antlia Server</div>
@@ -41,8 +96,12 @@ export default function Page() {
         </div>
 
         <nav className="topActions">
-          <a className="btn btnGhost" data-magnet data-nav="highlights" href="#highlights">Highlights</a>
-          <a className="btn btnGhost" data-magnet data-nav="gallery" href="#gallery">Gallery</a>
+          <a className="btn btnGhost" data-magnet data-nav="highlights" href="#highlights">
+            Highlights
+          </a>
+          <a className="btn btnGhost" data-magnet data-nav="gallery" href="#gallery">
+            Gallery
+          </a>
           <a
             className="btn btnPrimary btnPulse"
             data-magnet
@@ -53,14 +112,19 @@ export default function Page() {
             JOIN DISCORD
           </a>
         </nav>
+
         <div className="topbarProgress" aria-hidden="true">
           <span />
         </div>
       </header>
 
+      {/* ================= Hero ================= */}
       <section className="hero">
         <div className="heroMedia" aria-hidden="true">
-          <div className="heroImg" style={{ backgroundImage: `url(/images/hero-21x9-1920x823.png)` }} />
+          <div
+            className="heroImg"
+            style={{ backgroundImage: `url(/images/hero-21x9-1920x823.png)` }}
+          />
           <div className="heroVignette" />
           <div className="heroScanlines" />
           <div className="heroDust" />
@@ -69,7 +133,9 @@ export default function Page() {
 
         <div className="container heroInner reveal">
           <div className="pillRow">
-            <span className="pill"><span className="pillLed" /> FREE TO PLAY</span>
+            <span className="pill">
+              <span className="pillLed" /> FREE TO PLAY
+            </span>
             <span className="pill">COMMUNITY</span>
             <span className="pill">LONG-TERM WORLD</span>
           </div>
@@ -78,9 +144,10 @@ export default function Page() {
             Antlia <span className="heroTitleAccent">Minecraft Server</span>
           </h1>
 
-          <p className="heroLead reveal d2">{shareText}</p>
+          <p className="heroLead reveal d2">{shareDescription}</p>
 
           <HeroActions inviteUrl={DISCORD_INVITE} />
+
           <LiveStatus
             discordUrl={DISCORD_INVITE}
             serverLabel="Antlia"
@@ -89,7 +156,15 @@ export default function Page() {
 
           <div className="inviteRow reveal d4">
             <span className="inviteLabel">INVITE:</span>
-            <a className="inviteLink" data-magnet href={DISCORD_INVITE} target="_blank" rel="noreferrer">{DISCORD_INVITE}</a>
+            <a
+              className="inviteLink"
+              data-magnet
+              href={DISCORD_INVITE}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {DISCORD_INVITE}
+            </a>
           </div>
 
           <div className="chipRow reveal d5">
@@ -99,18 +174,24 @@ export default function Page() {
           </div>
 
           <div id="highlights" className="anchor" />
+
+          {/* ================= Highlights ================= */}
           <div className="heroCards reveal">
             <div className="card cardTall">
               <div className="cardHead">
                 <div className="cardTitle">SERVER HIGHLIGHTS</div>
-                <div className="cardBadge"><Image src="/logo.png" alt="" width={26} height={26} /></div>
+                <div className="cardBadge">
+                  <Image src="/logo.png" alt="" width={26} height={26} />
+                </div>
               </div>
 
               <div className="feature">
                 <div className="featureIcon">👥</div>
                 <div className="featureText">
                   <div className="featureName">Community First</div>
-                  <div className="featureDesc">ชุมชนอบอุ่น เล่นด้วยกัน สร้างเมืองร่วมกัน</div>
+                  <div className="featureDesc">
+                    ชุมชนอบอุ่น เล่นด้วยกัน สร้างเมืองร่วมกัน
+                  </div>
                 </div>
               </div>
 
@@ -126,7 +207,9 @@ export default function Page() {
                 <div className="featureIcon">⚡</div>
                 <div className="featureText">
                   <div className="featureName">Long-term World</div>
-                  <div className="featureDesc">โลกพัฒนาไปเรื่อย ๆ เหมาะกับสายเล่นยาว</div>
+                  <div className="featureDesc">
+                    โลกพัฒนาไปเรื่อย ๆ เหมาะกับสายเล่นยาว
+                  </div>
                 </div>
               </div>
 
@@ -142,39 +225,45 @@ export default function Page() {
 
             <div className="card cardWide">
               <div className="stats">
-                <div className="stat" >
+                <div className="stat">
                   <div className="statLabel">FREE TO PLAY</div>
                   <div className="statValue glowText">100%</div>
                   <div className="statDesc">เล่นฟรี เข้าร่วมได้เลย</div>
                 </div>
 
-                <div className="stat" >
+                <div className="stat">
                   <div className="statLabel">REGISTER</div>
                   <div className="statValue">DISCORD</div>
-                  <div className="statDesc">ลงทะเบียนและประกาศข่าวในที่เดียว</div>
+                  <div className="statDesc">
+                    ลงทะเบียนและประกาศข่าวในที่เดียว
+                  </div>
                 </div>
 
-                <div className="stat" >
+                <div className="stat">
                   <div className="statLabel">WORLD</div>
                   <div className="statValue">LONG-TERM</div>
-                  <div className="statDesc">เมืองโตขึ้นเรื่อย ๆ แบบมีเรื่องราว</div>
+                  <div className="statDesc">
+                    เมืองโตขึ้นเรื่อย ๆ แบบมีเรื่องราว
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="belowHero">
-            <SocialShare title={shareTitle} text={shareText} />
+            <SocialShare title={shareTitle} text={shareDescription} />
           </div>
         </div>
       </section>
 
+      {/* ================= Platform Support ================= */}
       <section className="section">
         <div className="container">
           <div className="sectionHead reveal">
             <h2 className="sectionTitle">Platform Support</h2>
             <p className="sectionDesc">
-              เล่นได้ทุกแพลตฟอร์ม บน PC, Tablet, หรือมือถือก็ได้ เลือกได้ Java Edition หรือ Bedrock Edition
+              เล่นได้ทุกแพลตฟอร์ม บน PC, Tablet, หรือมือถือก็ได้ เลือกได้ Java
+              Edition หรือ Bedrock Edition
             </p>
           </div>
 
@@ -214,11 +303,12 @@ export default function Page() {
         <div className="sectionDivider" aria-hidden="true" />
       </div>
 
-
+      {/* ================= Gallery ================= */}
       <section className="section" id="gallery">
         <WorldMomentsGallery items={WORLD_MOMENTS} />
       </section>
 
+      {/* ================= Final CTA ================= */}
       <section className="section reveal">
         <div className="container">
           <div className="finalCta">
@@ -230,7 +320,13 @@ export default function Page() {
                   กดเข้าดิสคอร์ดเพื่อสมัคร แล้วมาสร้างเมือง / สำรวจ / ผจญภัยด้วยกัน
                 </div>
               </div>
-              <a className="btn btnPrimary btnBig btnShine" data-magnet href={DISCORD_INVITE} target="_blank" rel="noreferrer">
+              <a
+                className="btn btnPrimary btnBig btnShine"
+                data-magnet
+                href={DISCORD_INVITE}
+                target="_blank"
+                rel="noreferrer"
+              >
                 START YOUR JOURNEY <span className="arrow">→</span>
               </a>
             </div>
@@ -238,20 +334,30 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ================= Footer ================= */}
       <footer className="footer">
         <div className="container footerInner">
           <div className="footerLeft">
-            <span>© {new Date().getFullYear()} GUMON GAMING HUB • ANTILIA SERVER</span>
+            <span>
+              © {new Date().getFullYear()} GUMON GAMING HUB • ANTILIA SERVER
+            </span>
           </div>
           <div className="footerRight">
-            <a href={DISCORD_INVITE} target="_blank" rel="noreferrer">Discord</a>
+            <a href={DISCORD_INVITE} target="_blank" rel="noreferrer">
+              Discord
+            </a>
             <span className="sep">•</span>
-            <a data-nav="highlights" href="#highlights">Highlights</a>
+            <a data-nav="highlights" href="#highlights">
+              Highlights
+            </a>
             <span className="sep">•</span>
-            <a data-nav="gallery" href="#gallery">Gallery</a>
+            <a data-nav="gallery" href="#gallery">
+              Gallery
+            </a>
           </div>
         </div>
       </footer>
+
       <FloatingCta href={DISCORD_INVITE} />
     </main>
   );
