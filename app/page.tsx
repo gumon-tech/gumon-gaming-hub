@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { SHARE_TITLE, SHARE_DESCRIPTION } from "@/lib/seo";
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
@@ -14,12 +14,9 @@ import SmoothNav from "@/components/SmoothNav";
 import MagneticFX from "@/components/MagneticFX";
 import HeroParallax from "@/components/HeroParallax";
 import FloatingCta from "@/components/FloatingCta";
+import { SITE_URL } from "@/lib/site";
 
 const DISCORD_INVITE = process.env.NEXT_PUBLIC_DISCORD_INVITE || "";
-
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "http://localhost:3000";
 
 const shareTitle = "Antlia Minecraft Server | Gumon Gaming Hub";
 const shareDescription =
@@ -29,15 +26,14 @@ const shareDescription =
    Metadata (Homepage OG)
 ========================= */
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  title: shareTitle,
-  description: shareDescription,
-
+  metadataBase: new URL(SITE_URL),
+  title: SHARE_TITLE,
+  description: SHARE_DESCRIPTION,
   openGraph: {
     type: "website",
-    url: baseUrl,
-    title: shareTitle,
-    description: shareDescription,
+    url: SITE_URL,
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     images: [
       {
         url: "/images/og/og-facebook-gumon-game-text-sub.png",
@@ -47,11 +43,10 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: shareTitle,
-    description: shareDescription,
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     images: [
       {
         url: "/images/og/og-x-antlia-minecraft.png",
@@ -62,7 +57,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
 /* =========================
    Page Component
 ========================= */
@@ -144,7 +138,7 @@ export default function Page() {
             Antlia <span className="heroTitleAccent">Minecraft Server</span>
           </h1>
 
-          <p className="heroLead reveal d2">{shareDescription}</p>
+          <p className="heroLead reveal d2">{SHARE_DESCRIPTION}</p>
 
           <HeroActions inviteUrl={DISCORD_INVITE} />
 
@@ -251,7 +245,7 @@ export default function Page() {
           </div>
 
           <div className="belowHero">
-            <SocialShare title={shareTitle} text={shareDescription} />
+            <SocialShare title={SHARE_TITLE} text={SHARE_DESCRIPTION} />
           </div>
         </div>
       </section>

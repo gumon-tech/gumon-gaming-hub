@@ -1,23 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SITE_NAME, SHARE_TITLE, SHARE_DESCRIPTION, ORG_NAME } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site";
 
-const siteName = "Gumon Gaming Hub — Antlia Server";
-const title = "Antlia Minecraft Server | Gumon Gaming Hub";
-const description =
-  "เซิร์ฟเวอร์ Minecraft เล่นฟรีจาก Gumon Gaming Hub — เน้น Community, การสร้างเมือง, และโลกแบบ Long-term ที่พัฒนาไปเรื่อย ๆ สมัครผ่าน Discord ได้เลย!";
-
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://game.gumon.io";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  title,
-  description,
-  applicationName: siteName,
+  metadataBase: new URL(SITE_URL),
+  title: SHARE_TITLE,
+  description: SHARE_DESCRIPTION,
+  applicationName: SITE_NAME,
 
-  alternates: {
-    canonical: baseUrl,
-  },
+  alternates: { canonical: SITE_URL },
 
   icons: {
     icon: "/logo.png",
@@ -27,10 +20,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    url: baseUrl,
-    siteName,
-    title,
-    description,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     images: [
       {
         url: "/images/og/og-universal-antlia.png",
@@ -44,8 +37,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     images: [
       {
         url: "/images/og/og-x-antlia-minecraft.png",
@@ -57,7 +50,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 // Move themeColor to viewport export to satisfy Next.js metadata requirements
 export const viewport = {
   themeColor: "#0b1220",
@@ -67,6 +59,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="th">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: SITE_NAME,
+              url: SITE_URL,
+              description: SHARE_DESCRIPTION,
+              publisher: {
+                "@type": "Organization",
+                name: ORG_NAME,
+                url: SITE_URL,
+              },
+              inLanguage: "th-TH",
+            }),
+          }}
+        />
+
+
         <link
           rel="preload"
           as="image"
