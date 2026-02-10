@@ -45,6 +45,7 @@ jobs:
           NEXT_PUBLIC_MC_BEDROCK_PORT: ${{ vars.NEXT_PUBLIC_MC_BEDROCK_PORT }}
           NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
           NEXT_PUBLIC_DISCORD_INVITE: ${{ vars.NEXT_PUBLIC_DISCORD_INVITE }}
+          NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID }}
 
       # ✅ Upload out/ ให้ Pages
       - name: Upload artifact

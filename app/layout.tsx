@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SITE_NAME, SHARE_TITLE, SHARE_DESCRIPTION, ORG_NAME } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
-
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -59,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="th">
       <head>
+        <GoogleAnalytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
