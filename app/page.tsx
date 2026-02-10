@@ -152,7 +152,6 @@ export default function Page() {
             <span className="inviteLabel">INVITE:</span>
             <a
               className="inviteLink"
-              data-magnet
               href={DISCORD_INVITE}
               target="_blank"
               rel="noreferrer"
