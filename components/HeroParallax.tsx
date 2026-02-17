@@ -5,15 +5,23 @@ import { useEffect } from "react";
 export default function HeroParallax() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduce.matches) return;
+    const small = window.matchMedia("(max-width: 980px)");
+    if (reduce.matches || small.matches) return;
 
     const img = document.querySelector<HTMLElement>(".heroImg");
     const hero = document.querySelector<HTMLElement>(".hero");
     if (!img || !hero) return;
 
     let raf = 0;
+    let lastTs = 0;
+    const minFrameMs = 32; // ~30fps
 
     const update = () => {
+      if (small.matches) {
+        img.style.transform = "translate3d(0,0,0) scale(1.02)";
+        return;
+      }
+
       const rect = hero.getBoundingClientRect();
       const vh = window.innerHeight || 0;
 
@@ -28,6 +36,9 @@ export default function HeroParallax() {
     };
 
     const onScroll = () => {
+      const now = performance.now();
+      if (now - lastTs < minFrameMs) return;
+      lastTs = now;
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(update);
     };

@@ -22,6 +22,9 @@ export default function FloatingCta({ href }: Props) {
   const [on, setOn] = useState(false);
   const [live, setLive] = useState<LiveDetail | null>(null);
   const nearFooterRef = useRef(false);
+  const heroBottomRef = useRef(0);
+  const footerTopRef = useRef(Number.POSITIVE_INFINITY);
+  const onRef = useRef(false);
 
   // show/hide logic (เหมือนเดิม)
   useEffect(() => {
@@ -31,21 +34,26 @@ export default function FloatingCta({ href }: Props) {
 
     let raf = 0;
 
+    const measure = () => {
+      heroBottomRef.current = hero.getBoundingClientRect().top + window.scrollY + hero.offsetHeight;
+      footerTopRef.current = footer
+        ? footer.getBoundingClientRect().top + window.scrollY
+        : Number.POSITIVE_INFINITY;
+    };
+
     const update = () => {
       const y = window.scrollY || 0;
 
-      const heroBottom = hero.getBoundingClientRect().bottom + y;
-      const shouldShow = y > heroBottom - 60;
+      const shouldShow = y > heroBottomRef.current - 60;
 
-      if (footer) {
-        const footerTop = footer.getBoundingClientRect().top + y;
-        const vh = window.innerHeight || 0;
-        nearFooterRef.current = y + vh > footerTop - 80;
-      } else {
-        nearFooterRef.current = false;
+      const vh = window.innerHeight || 0;
+      nearFooterRef.current = y + vh > footerTopRef.current - 80;
+
+      const nextOn = shouldShow && !nearFooterRef.current;
+      if (nextOn !== onRef.current) {
+        onRef.current = nextOn;
+        setOn(nextOn);
       }
-
-      setOn(shouldShow && !nearFooterRef.current);
     };
 
     const onScroll = () => {
@@ -53,14 +61,22 @@ export default function FloatingCta({ href }: Props) {
       raf = requestAnimationFrame(update);
     };
 
+    const onRecalc = () => {
+      measure();
+      onScroll();
+    };
+
+    measure();
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onRecalc);
+    window.addEventListener("load", onRecalc);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onRecalc);
+      window.removeEventListener("load", onRecalc);
     };
   }, []);
 

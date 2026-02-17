@@ -5,7 +5,6 @@ import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
 import WorldMomentsGallery from "@/components/WorldMomentsGallery";
 import { WORLD_MOMENTS } from "@/lib/galleryImages";
-import ScrollTopbarEffect from "@/components/ScrollTopbarEffect";
 import ActiveNav from "@/components/ActiveNav";
 import ScrollReveal from "@/components/ScrollReveal";
 import LiveStatus from "@/components/LiveStatus";
@@ -70,7 +69,6 @@ export default function Page() {
       <MagneticFX />
       <HeroParallax />
       <ActiveNav ids={["highlights", "gallery"]} offset={96} />
-      <ScrollTopbarEffect />
       <ScrollReveal />
 
       {/* ================= Topbar ================= */}

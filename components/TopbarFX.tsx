@@ -9,16 +9,24 @@ export default function TopbarFX() {
     if (!topbar || !bar) return;
 
     let raf = 0;
+    let lastScrolled = false;
+    let lastProgress = -1;
 
     const update = () => {
       const y = window.scrollY || 0;
-      topbar.classList.toggle("isScrolled", y > 10);
+      const isScrolled = y > 10;
+      if (isScrolled !== lastScrolled) {
+        topbar.classList.toggle("isScrolled", isScrolled);
+        lastScrolled = isScrolled;
+      }
 
       const doc = document.documentElement;
       const scrollH = doc.scrollHeight - doc.clientHeight;
       const p = scrollH > 0 ? Math.min(1, Math.max(0, y / scrollH)) : 0;
+      if (Math.abs(p - lastProgress) < 0.001) return;
+      lastProgress = p;
 
-      bar.style.width = `${p * 100}%`;
+      bar.style.transform = `scaleX(${p})`;
     };
 
     const onScroll = () => {

@@ -9,40 +9,26 @@ export default function ScrollReveal({ selector = ".reveal" }: Props) {
     const els = Array.from(document.querySelectorAll<HTMLElement>(selector));
     if (!els.length) return;
 
-    const inView = (el: HTMLElement) => {
-      const r = el.getBoundingClientRect();
-      const vh = window.innerHeight || 0;
-      // เข้าโซนแล้วค่อย reveal (กันพลาดตอนโหลด/shift)
-      return r.top < vh * 0.88 && r.bottom > vh * 0.10;
-    };
-
-    const tick = () => {
-      els.forEach((el) => {
-        if (!el.classList.contains("isIn") && inView(el)) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
           el.classList.add("isIn");
-        }
-      });
-    };
+          io.unobserve(el);
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.1,
+      }
+    );
 
-    // init + listen
-    tick();
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    // เผื่อรูปโหลดแล้วดัน layout
-    window.addEventListener("load", tick);
+    els.forEach((el) => io.observe(el));
 
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      window.removeEventListener("load", tick);
+      io.disconnect();
     };
   }, [selector]);
 
