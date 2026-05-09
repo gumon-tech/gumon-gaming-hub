@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gumon Gaming Hub - Antlia Landing
 
-## Getting Started
+Next.js static site for the Gumon Gaming Hub / Antlia Minecraft Server public landing page.
 
-First, run the development server:
+## What This App Does
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Presents the Antlia Minecraft Server landing page.
+- Shows Java and Bedrock join information.
+- Links players into Discord for registration, rules, and updates.
+- Displays a live Minecraft server status widget.
+- Serves optimized social preview metadata and static image assets.
+- Deploys as a static export to GitHub Pages.
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide React
+- GitHub Pages static export
+
+## Project Layout
+
+- `app/`: Next.js app route, metadata, layout, and global styles.
+- `components/`: UI and interaction components.
+- `lib/`: SEO constants, site URL helper, and gallery image metadata.
+- `public/`: static logo, hero, gallery, Open Graph, sitemap, and robots assets.
+- `.github/workflows/deploy.yml`: GitHub Pages deployment workflow.
+- `env.template`: public environment variable template.
+
+## Environment Variables
+
+Copy `env.template` to `.env.local` for local development.
+
+```sh
+NEXT_PUBLIC_SITE_URL=
+NEXT_PUBLIC_MC_HOST=
+NEXT_PUBLIC_MC_JAVA_PORT=
+NEXT_PUBLIC_MC_BEDROCK_PORT=
+NEXT_PUBLIC_MC_TYPE=java
+NEXT_PUBLIC_DISCORD_INVITE=
+NEXT_PUBLIC_GA_ID=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Notes:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- All variables are `NEXT_PUBLIC_*`, so they are embedded into the client bundle.
+- Do not put private secrets in this app.
+- GitHub Pages deployment reads these values from the `github-pages` environment variables.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Development
 
-## Learn More
+```sh
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Validation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+npm run lint
+npm run build
+```
 
-## Deploy on Vercel
+`next.config.ts` is configured with `output: "export"`, so production build output is written to `out/`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deployment is handled by GitHub Actions on pushes to `main`.
+
+The workflow:
+
+1. Installs dependencies with `npm ci`.
+2. Builds the static export with GitHub environment variables.
+3. Uploads `out/` as a GitHub Pages artifact.
+4. Deploys to GitHub Pages.
+
+## Workspace Relationship
+
+This repository is used as the `gaming-hub/` submodule in `game-mc-antlia`.
+
+When changing this project from the workspace:
+
+1. Commit and push changes inside `gaming-hub/`.
+2. Return to the workspace root.
+3. Commit the updated `gaming-hub` submodule pointer.

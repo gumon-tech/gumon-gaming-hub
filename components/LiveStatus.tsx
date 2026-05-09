@@ -103,14 +103,14 @@ export default function LiveStatus({
   refreshMs = 60_000,
 }: Props) {
   const [copied, setCopied] = useState(false);
-  const [status, setStatus] = useState<StatusState>({ online: true });
-
   const endpoint = useMemo(() => buildEndpoint(), []);
+  const [status, setStatus] = useState<StatusState>(() =>
+    endpoint ? { online: true } : { online: false, checkedAt: new Date() }
+  );
 
   // Fetch status (and refresh)
   useEffect(() => {
     if (!endpoint) {
-      setStatus({ online: false, checkedAt: new Date() });
       broadcastStatus({ online: false });
       return;
     }

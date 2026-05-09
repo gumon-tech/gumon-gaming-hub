@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SHARE_TITLE, SHARE_DESCRIPTION, ORG_NAME,SITE_NAME } from "@/lib/seo";
+import { SHARE_TITLE, SHARE_DESCRIPTION, ORG_NAME, SITE_NAME } from "@/lib/seo";
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
 import Image from "next/image";
@@ -16,10 +16,6 @@ import FloatingCta from "@/components/FloatingCta";
 import { SITE_URL } from "@/lib/site";
 
 const DISCORD_INVITE = process.env.NEXT_PUBLIC_DISCORD_INVITE || "";
-
-const shareTitle = "Antlia Minecraft Server | Gumon Gaming Hub";
-const shareDescription =
-  "เล่นฟรี • Community • Long-term World — สมัครผ่าน Discord แล้วเข้ามาสร้างเมือง/ผจญภัยด้วยกัน!";
 
 /* =========================
    Metadata (Homepage OG)
