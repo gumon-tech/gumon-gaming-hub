@@ -1625,3 +1625,218 @@ html{
 @media (prefers-reduced-motion: reduce){
   .floatCta{ transition: none; transform: none; }
 }
+
+/* ===================== Guide pages ===================== */
+.guideMain{ padding: 8px 0 48px; }
+.guideHero{ padding: 44px 0 6px; }
+.guideKicker{
+  font-family: var(--mono);
+  letter-spacing: .2em;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 900;
+}
+.guideTitle{
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 10px 0 10px;
+}
+.guideLead{ color: var(--muted); line-height: 1.85; max-width: 780px; }
+
+.guideGrid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+@media (max-width: 900px){ .guideGrid{ grid-template-columns: 1fr; } }
+.guideCard{
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.10);
+  background: linear-gradient(180deg, rgba(15,23,39,.70), rgba(10,16,28,.55));
+  box-shadow: var(--shadow2);
+  padding: 20px;
+  transition: transform .18s ease, border-color .18s ease;
+}
+.guideCard:hover{ transform: translateY(-3px); border-color: rgba(52,211,153,.35); }
+.guideCardIcon{ font-size: 30px; }
+.guideCardTitle{ font-weight: 900; font-size: 17px; margin-top: 10px; }
+.guideCardDesc{ color: var(--muted2); font-size: 13px; line-height: 1.7; margin-top: 6px; }
+.guideCardCta{
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.tocChips{ display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 6px; }
+.tocChip{
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(15,23,39,.65);
+  border: 1px solid var(--stroke);
+  color: var(--muted);
+  font-size: 12.5px;
+  transition: border-color .15s ease, color .15s ease;
+}
+.tocChip:hover{ border-color: rgba(52,211,153,.4); color: var(--text); }
+
+.docH2{
+  font-size: 22px;
+  font-weight: 900;
+  margin: 36px 0 10px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  scroll-margin-top: 90px;
+}
+.docH3{ font-size: 16px; font-weight: 800; margin: 22px 0 8px; color: var(--accent); }
+.docP{ color: var(--muted); line-height: 1.9; margin: 8px 0; max-width: 820px; }
+.docList{ color: var(--muted); line-height: 1.95; padding-left: 20px; margin: 8px 0; max-width: 820px; }
+.docList li{ margin: 2px 0; }
+
+.docTableWrap{
+  overflow-x: auto;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius2);
+  background: var(--panel2);
+  margin: 14px 0;
+}
+.docTable{ width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.docTable th{
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--muted2);
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--stroke);
+  white-space: nowrap;
+  background: rgba(7,11,18,.4);
+}
+.docTable td{
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  color: var(--muted);
+  line-height: 1.65;
+  vertical-align: top;
+}
+.docTable tr:last-child td{ border-bottom: none; }
+.docTable code, .docP code, .docList code, .stepBody code, .note code{
+  background: rgba(96,165,250,.10);
+  border: 1px solid rgba(96,165,250,.18);
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: .92em;
+  white-space: nowrap;
+}
+
+.cmd{
+  display: block;
+  background: #0a101d;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: #d7e7ff;
+  overflow-x: auto;
+  margin: 12px 0;
+  white-space: pre;
+  line-height: 1.75;
+}
+
+.stepList{
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  gap: 12px;
+  max-width: 860px;
+}
+.step{
+  position: relative;
+  padding: 15px 18px 15px 58px;
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius2);
+  background: var(--panel2);
+}
+.step::before{
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(52,211,153,.14);
+  border: 1px solid rgba(52,211,153,.35);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-weight: 900;
+  font-size: 13px;
+}
+.stepTitle{ font-weight: 800; margin-bottom: 5px; }
+.stepBody{ color: var(--muted); font-size: 13.5px; line-height: 1.85; }
+
+.note{
+  border-left: 3px solid var(--accent);
+  background: rgba(52,211,153,.07);
+  padding: 11px 15px;
+  border-radius: 0 12px 12px 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.85;
+  margin: 14px 0;
+  max-width: 820px;
+}
+.noteWarn{ border-left-color: #f59e0b; background: rgba(245,158,11,.07); }
+.noteGold{ border-left-color: #f1c40f; background: rgba(241,196,15,.07); }
+
+.badgeLord{
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(241,196,15,.14);
+  border: 1px solid rgba(241,196,15,.35);
+  color: #f1c40f;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  font-weight: 900;
+}
+.badgeDiscord{
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(88,101,242,.16);
+  border: 1px solid rgba(88,101,242,.4);
+  color: #a5b0ff;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  font-weight: 900;
+}
+.badgeGame{
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(52,211,153,.14);
+  border: 1px solid rgba(52,211,153,.35);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  font-weight: 900;
+}
+
+.guideBackRow{ margin-top: 34px; display: flex; gap: 10px; flex-wrap: wrap; }

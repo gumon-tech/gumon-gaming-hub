@@ -90,6 +90,9 @@ export default function Page() {
           <a className="btn btnGhost" data-magnet data-nav="gallery" href="#gallery">
             Gallery
           </a>
+          <a className="btn btnGhost" data-magnet href="/guide/">
+            Guides
+          </a>
           <a
             className="btn btnPrimary btnPulse"
             data-magnet
@@ -207,6 +210,9 @@ export default function Page() {
                   <li>ลงทะเบียน / อ่านกติกา</li>
                   <li>รับ IP/วิธีเข้าเล่น แล้วลุย!</li>
                 </ol>
+                <a className="inviteLink" href="/guide/getting-started/" style={{ display: "inline-block", marginTop: 10 }}>
+                  📖 อ่านคู่มือเริ่มเล่นแบบละเอียด →
+                </a>
               </div>
             </div>
 
@@ -341,6 +347,8 @@ export default function Page() {
             <a data-nav="gallery" href="#gallery">
               Gallery
             </a>
+            <span className="sep">•</span>
+            <a href="/guide/">Guides</a>
           </div>
         </div>
       </footer>
