@@ -169,16 +169,17 @@ export default function GettingStarted() {
         <li className="step">
           <div className="stepTitle">เลือกอาชีพกับ Antlia Careers</div>
           <div className="stepBody">
-            คุยกับ <strong>Antlia Careers</strong> (หมาสีขาว) ที่ spawn —
+            คุยกับ <strong>Antlia Careers</strong> ที่ spawn —
             อาชีพคือแหล่งรายได้หลักของเกม มีให้เลือก 9 อาชีพ
             เลือกหลายอาชีพพร้อมกันได้
           </div>
         </li>
         <li className="step">
-          <div className="stepTitle">ดูของใน Antlia Store</div>
+          <div className="stepTitle">ซื้อ-ขายของกับร้านค้าในเมือง</div>
           <div className="stepBody">
-            คุยกับ <strong>Antlia Store</strong> (แมวสีแดง) ที่ spawn
-            หรือพิมพ์ <code>/astore</code> เพื่อดูสินค้าใน Admin Shop
+            คุยกับ NPC ร้านค้า (Blacksmith, Grocer, Fisher, Builder ฯลฯ)
+            หรือพิมพ์ <code>/astore</code> เพื่อดูสินค้าใน Admin Shop —
+            ขายของให้ระบบด้วย <code>/sell</code>
           </div>
         </li>
         <li className="step">

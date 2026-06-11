@@ -94,7 +94,9 @@ export default function PlayerGuide() {
 
       <h2 className="docH2" id="jobs">⛏️ ระบบอาชีพ (Jobs)</h2>
       <p className="docP">
-        เลือกได้หลายอาชีพพร้อมกัน แต่รายได้รวมยังอยู่ใน cap 1,500 A/วัน
+        เลือกได้หลายอาชีพพร้อมกัน แต่รายได้รวมยังอยู่ใน cap 1,500 A/วัน •
+        ทุกอาชีพมี <strong>daily quest วันละ 1 อัน รางวัล 100 A</strong>{" "}
+        (ไม่ติด cap) • level สูงสุดของทุกอาชีพคือ 200
       </p>
       <span className="cmd">{`/jobs browse          # ดูอาชีพทั้งหมด
 /jobs join <ชื่อ>      # เข้าร่วมอาชีพ
@@ -115,13 +117,13 @@ export default function PlayerGuide() {
           <tbody>
             <tr><td><strong>Builder</strong></td><td>วางบล็อก</td><td>0.9 A</td></tr>
             <tr><td><strong>Crafter</strong></td><td>Craft ไอเทม</td><td>10 A (beacon)</td></tr>
-            <tr><td><strong>Digger</strong></td><td>ขุดดิน/ทราย</td><td>6 A</td></tr>
-            <tr><td><strong>Enchanter</strong></td><td>เพิ่มคาถา</td><td>~12 A</td></tr>
+            <tr><td><strong>Digger</strong></td><td>ขุดดิน/ทราย/กรวด</td><td>0.6 A (gravel, clay)</td></tr>
+            <tr><td><strong>Enchanter</strong></td><td>เพิ่มคาถา</td><td>6 A (silk touch)</td></tr>
             <tr><td><strong>Farmer</strong></td><td>ปลูกพืช เลี้ยงสัตว์</td><td>3 A</td></tr>
             <tr><td><strong>Hunter</strong></td><td>ฆ่า mob</td><td>150 A (Ender Dragon)</td></tr>
             <tr><td><strong>Miner</strong></td><td>ขุดแร่</td><td>7 A (deepslate emerald)</td></tr>
             <tr><td><strong>Weaponsmith</strong></td><td>Craft อาวุธ/เกราะ</td><td>20 A (diamond chestplate)</td></tr>
-            <tr><td><strong>Woodcutter</strong></td><td>ตัดไม้</td><td>6 A</td></tr>
+            <tr><td><strong>Woodcutter</strong></td><td>ตัดไม้</td><td>0.25 A (log ปกติ)</td></tr>
           </tbody>
         </table>
       </div>
@@ -149,7 +151,7 @@ export default function PlayerGuide() {
             <tr><td><strong>[Elite]</strong></td><td>อาชีพใดก็ได้ Lv.100</td><td>5</td><td>30</td><td>—</td></tr>
             <tr><td><strong>[VIP]</strong></td><td>Admin ตั้งให้</td><td>10</td><td>30</td><td><code>/fly</code></td></tr>
             <tr><td><strong>[Lord]</strong></td><td>เจ้าผู้ครองนคร (อนุมัติโดย Crown)</td><td>5</td><td>30</td><td>
-              <Link href="/guide/lord/" style={{ color: "#f1c40f" }}>ดูคู่มือ Lord →</Link>
+              <code>/fly</code> + <Link href="/guide/lord/" style={{ color: "#f1c40f" }}>ดูคู่มือ Lord →</Link>
             </td></tr>
           </tbody>
         </table>
@@ -204,8 +206,9 @@ export default function PlayerGuide() {
 
       <h3 className="docH3">Admin Shop</h3>
       <p className="docP">
-        พิมพ์ <code>/astore</code> หรือคุยกับ <strong>Antlia Store</strong>{" "}
-        (แมวสีแดง) ที่ spawn — ซื้อของพื้นฐานราคากลางจากระบบ
+        พิมพ์ <code>/astore</code> หรือคุยกับ NPC ร้านค้าในเมือง (Blacksmith,
+        Grocer, Fisher, Builder, Decorator ฯลฯ) — ซื้อของพื้นฐานราคากลางจากระบบ
+        และขายของให้ระบบได้ด้วย <code>/sell</code>
       </p>
 
       <h3 className="docH3">ร้านค้าผู้เล่น (QuickShop)</h3>
@@ -248,6 +251,7 @@ export default function PlayerGuide() {
             <tr><td><code>/jobs join &lt;ชื่อ&gt;</code></td><td>เข้าร่วมอาชีพ</td><td>—</td></tr>
             <tr><td><code>/jobs stats</code></td><td>ดู level อาชีพตัวเอง</td><td>—</td></tr>
             <tr><td><code>/astore</code></td><td>เปิด Admin Shop</td><td>—</td></tr>
+            <tr><td><code>/sell</code></td><td>ขายไอเทมให้ระบบ (sellall)</td><td>—</td></tr>
             <tr><td><code>/quests</code></td><td>ดู quest ที่มี</td><td>—</td></tr>
             <tr><td><code>/spawn</code></td><td>กลับ spawn</td><td>5 A</td></tr>
             <tr><td><code>/home</code></td><td>กลับบ้าน</td><td>3 A</td></tr>

@@ -50,6 +50,7 @@ export default function LordGuide() {
         <li>Prefix ในเกม: <span className="badgeLord">[Lord of &lt;ชื่อเมือง&gt;]</span> สีทอง</li>
         <li>Discord role: <code>@Lord</code> + role ประจำเมือง <code>@Lord · &lt;ชื่อเมือง&gt;</code></li>
         <li>ได้ perk ทั้งหมดของ Elite (home 5 จุด, ร้านค้า 30) + สิทธิ์ปกครองเพิ่มเติม</li>
+        <li>มีสิทธิ์ <code>/fly</code> — บินได้สำหรับงาน build ในเมือง</li>
       </ul>
 
       <h2 className="docH2" id="onboarding">🏗️ เปิดเมือง — Step by Step</h2>
