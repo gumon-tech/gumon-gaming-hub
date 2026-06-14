@@ -527,7 +527,28 @@ export default function LordGuide() {
         🎯 ทางลัด: ขอเปิดเควสผ่าน Discord ได้ด้วย <code>/gm-mc-quest-request</code> (เลือก type/target/amount/reward
         เหมือนกัน แต่ไม่ผูก NPC — รับที่ไหนก็ได้) • Crown กดอนุมัติแล้วเควสถูกสร้างอัตโนมัติเหมือนกัน •
         flow ผูก NPC ในเกมเหมาะกับ &quot;กระดานเควสประจำเมือง&quot; (มีสัญลักษณ์เหนือหัว NPC) มากกว่า
+      </div>
 
+      <h3 className="docH3">เควสใหญ่หลายฉาก — Quest Builder (MMORPG)</h3>
+      <p className="docP">
+        อยากได้เควสเนื้อเรื่องหลายขั้น (หลาย stage) หรือหลายภารกิจในขั้นเดียว + รางวัลเป็นไอเทมด้วย —
+        ใช้ <code>/questbuild</code> สร้างทีละขั้น (เลือก NPC ก่อน) แล้วค่อย submit:
+      </p>
+      <span className="cmd">{`/npc select                          # เลือก NPC กระดานเควสก่อน
+/questbuild new dragonsaga ตำนานมังกร   # เริ่มสร้าง (ผูกกับ NPC)
+/questbuild obj kill zombie 20         # objective ของ stage 1
+/questbuild obj break iron_ore 10      # หลาย objective ใน stage เดียวได้
+/questbuild stage                      # ขึ้น stage 2 (เนื้อเรื่องต่อ)
+/questbuild obj craft diamond_sword 1
+/questbuild money 150                  # รางวัลเงิน (≤200, หักคลัง)
+/questbuild item diamond 2             # รางวัลไอเทม (มีราคาหักคลัง)
+/questbuild daily                      # ทำซ้ำได้ทุก 24 ชม. (ถ้าต้องการ)
+/questbuild show                       # ดูสรุป + เช็คว่าผ่านเกณฑ์ไหม
+/questbuild submit                     # ส่ง Crown อนุมัติ → สร้างอัตโนมัติ`}</span>
+      <div className="note">
+        💡 ประเภท objective: <code>kill</code> <code>break</code> <code>place</code> <code>craft</code>{" "}
+        <code>smelt</code> <code>tame</code> <code>fish</code> • เควสยิ่งรางวัลแพง ยิ่งต้องมี objective
+        มากขึ้น (กันฟาร์มเงินคลัง) • ไอเทมรางวัลของแรงๆ (netherite/totem/shulker ฯลฯ) ใส่ไม่ได้
       </div>
 
       <h3 className="docH3">โบนัส: ประตูมิติ Nether</h3>
@@ -590,7 +611,8 @@ export default function LordGuide() {
             <tr><td><code>/citytreasury</code></td><td>ดูยอดคลัง + เรตภาษีของเมืองที่ยืน</td></tr>
             <tr><td><code>/setcitytax &lt;จำนวน&gt;</code> · <code>/setshoptax &lt;%&gt;</code></td><td>ตั้งภาษีเข้าเมือง / ภาษีร้านค้า</td></tr>
             <tr><td><code>/setcitywarp</code> · <code>/setcityclerk</code> · <code>/removecityclerk</code></td><td>ตั้งจุดลงรถไฟ / วาง-ลบ NPC ขายตั๋ว (ที่ตำแหน่งที่ยืน)</td></tr>
-            <tr><td><code>/requestquest &lt;id&gt; &lt;ภารกิจ&gt; | &lt;รางวัล&gt;</code></td><td>ขอเปิดเควสผูกกับ NPC ที่เลือก → ส่ง Crown อนุมัติ</td></tr>
+            <tr><td><code>/requestquest &lt;id&gt; &lt;kill|break|place&gt; &lt;target&gt; &lt;n&gt; &lt;รางวัล&gt;</code></td><td>เควสด่วน 1 ภารกิจ ผูก NPC ที่เลือก → Crown อนุมัติ = สร้างเอง</td></tr>
+            <tr><td><code>/questbuild &lt;new|obj|stage|money|item|daily|submit&gt;</code></td><td>สร้างเควสใหญ่หลายฉาก/หลายภารกิจ + รางวัลไอเทม (MMORPG)</td></tr>
             <tr><td><code>/rg info | flag | addmember | removemember</code></td><td>จัดการเขตเมือง</td></tr>
             <tr><td><code>{"//set //replace //copy //paste ..."}</code></td><td>WorldEdit ในเขตเมือง</td></tr>
             <tr><td><code>/npc create | select | type | skin | command ...</code></td><td>จัดการ NPC (ในเขตเมืองตัวเอง)</td></tr>
