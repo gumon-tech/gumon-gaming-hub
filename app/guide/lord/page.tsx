@@ -29,7 +29,8 @@ export default function LordGuide() {
           <a className="tocChip" href="#region">🗺️ จัดการเขตเมือง</a>
           <a className="tocChip" href="#worldedit">🧱 WorldEdit</a>
           <a className="tocChip" href="#npc">🧑‍🌾 NPC</a>
-          <a className="tocChip" href="#quests">📜 Quests</a>
+          <a className="tocChip" href="#treasury">💰 คลังเมือง</a>
+          <a className="tocChip" href="#quests">📜 สร้างเควส</a>
           <a className="tocChip" href="#limits">🚫 ข้อจำกัด</a>
           <a className="tocChip" href="#cheatsheet">⌨️ ตารางคำสั่ง</a>
         </div>
@@ -134,10 +135,17 @@ export default function LordGuide() {
         </li>
       </ol>
 
+      <div className="note">
+        🧱 <strong>ทางลัดในเกม:</strong> แทนที่จะพิมพ์พิกัดมุมใน Discord — เลือกพื้นที่ด้วย WorldEdit
+        (<code>//sel poly</code> หรือ <code>//pos1 //pos2</code>) แล้วพิมพ์ <code>/claimcity &lt;ชื่อ&gt;</code> ในเกม
+        ระบบจะส่งคำขอไปให้ Crown อนุมัติบน Discord ให้อัตโนมัติ • ตั้ง warp/clerk ก็ทำในเกมได้ที่จุดที่ยืน
+        (<code>/setcitywarp</code> <code>/setcityclerk</code>)
+      </div>
       <div className="note noteGold">
         ✅ <strong>Checklist หลังได้เป็น Lord:</strong> ตั้ง warp รถไฟ → วาง
-        Ticket Clerk → ปรับ flags เมือง → ตั้งข้อความ greeting/farewell →
-        ลงพิกัดเมืองใน <code>#แผนที่อาณาจักร</code> → ประชาสัมพันธ์เมือง
+        Ticket Clerk → ปรับ flags เมือง → ตั้งข้อความ greeting/farewell → ตั้งภาษี
+        (<code>/setcitytax</code> <code>/setshoptax</code>) → ลงพิกัดเมืองใน{" "}
+        <code>#แผนที่อาณาจักร</code> → ประชาสัมพันธ์เมือง
       </div>
 
       <h2 className="docH2" id="rail">🚂 ระบบรถไฟของเมือง</h2>
@@ -214,20 +222,124 @@ export default function LordGuide() {
 
       <h2 className="docH2" id="worldedit">🧱 WorldEdit / FAWE</h2>
       <p className="docP">
-        Lord ใช้ WorldEdit ได้เต็มรูปแบบ{" "}
-        <strong>ภายในเขตเมืองตัวเองเท่านั้น</strong> — ถ้าสั่งนอกเขตจะถูกระบบยกเลิก
-        (&quot;Outside allowed region&quot;)
+        <strong>FAWE</strong> (FastAsyncWorldEdit) คือเครื่องมือก่อสร้างทีละจำนวนมาก
+        — เลือกพื้นที่แล้วสั่งคำสั่งเดียว บล็อกหลายหมื่นก้อนเกิดทันที จุดสำคัญ:
       </p>
-      <span className="cmd">{`//wand                  # รับขวานเลือกพื้นที่ (ซ้าย=pos1, ขวา=pos2)
-//pos1  //pos2          # ตั้งจุดเลือกจากตำแหน่งที่ยืน
-//expand <n> <ทิศ>      # ขยายพื้นที่เลือก
-//set <block>           # เปลี่ยนทุกบล็อกในพื้นที่
-//replace <เก่า> <ใหม่>  # แทนที่บล็อกเฉพาะชนิด
-//copy  //paste         # คัดลอก / วาง
-//rotate <องศา>         # หมุน clipboard
-//undo  //redo          # ย้อนกลับ / ทำซ้ำ
-//drain <radius>        # ระบายน้ำ/ลาวา
-//smooth                # ปรับพื้นดินให้เรียบ`}</span>
+      <ul className="docList">
+        <li><strong>ฟรี ไม่กินไอเทมในกระเป๋า</strong> — <code>//set stone</code> เสกหินเต็มพื้นที่โดยไม่ต้องมีหินเลย (สร้างโครงเมืองไม่ต้องซื้อวัสดุ)</li>
+        <li><strong>ใช้ได้เฉพาะในเขตเมืองตัวเอง</strong> — สั่งนอกเขตจะถูกยกเลิก (&quot;Outside allowed region&quot;)</li>
+        <li>ทุกคำสั่งขึ้นต้นด้วย <code>//</code> (สแลชสองอัน) — ส่วน brush ใช้ <code>/</code> เดียว</li>
+      </ul>
+
+      <figure className="docFigure" style={{ margin: "1.25rem 0" }}>
+        <svg
+          width="100%"
+          viewBox="0 0 680 250"
+          role="img"
+          aria-label="หลักการ FAWE: เลือกพื้นที่ด้วย wand แล้วสั่งสร้างได้หลายรูปทรง เช่น //set //walls //sphere //pyramid"
+          style={{ display: "block" }}
+        >
+          <defs>
+            <marker id="faweArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#7f93b3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </marker>
+          </defs>
+          <rect x="1" y="1" width="678" height="248" rx="14" fill="rgba(15,23,39,0.55)" stroke="#1b2a44" />
+          <text x="22" y="34" fill="#f1c40f" fontSize="17" fontWeight="500">เลือกพื้นที่ครั้งเดียว → สั่งสร้างได้หลายรูปทรง</text>
+          <text x="22" y="56" fill="#9fb3d1" fontSize="13">ขั้น 1 — เลือกมุมตรงข้าม 2 จุดด้วย wand</text>
+
+          <polygon points="52,128 82,106 172,106 142,128" fill="#28395a" stroke="#3b5680" />
+          <polygon points="142,128 172,106 172,166 142,188" fill="#1f2d44" stroke="#3b5680" />
+          <rect x="52" y="128" width="90" height="60" fill="#22324d" stroke="#3b5680" />
+          <circle cx="52" cy="188" r="6" fill="#f1c40f" />
+          <circle cx="172" cy="106" r="6" fill="#f1c40f" />
+          <text x="18" y="208" fill="#9fb3d1" fontSize="12">pos1</text>
+          <text x="162" y="100" fill="#9fb3d1" fontSize="12">pos2</text>
+
+          <line x1="190" y1="147" x2="246" y2="147" stroke="#7f93b3" strokeWidth="2" markerEnd="url(#faweArrow)" />
+          <text x="246" y="56" fill="#9fb3d1" fontSize="13">ขั้น 2 — สั่ง 1 คำสั่ง</text>
+
+          <rect x="262" y="108" width="70" height="70" fill="#60a5fa" />
+          <text x="297" y="200" fill="#d7e7ff" fontSize="13" textAnchor="middle">//set</text>
+          <text x="297" y="218" fill="#9fb3d1" fontSize="11" textAnchor="middle">เต็มก้อน</text>
+
+          <g fill="#60a5fa">
+            <rect x="368" y="108" width="70" height="14" />
+            <rect x="368" y="164" width="70" height="14" />
+            <rect x="368" y="108" width="14" height="70" />
+            <rect x="424" y="108" width="14" height="70" />
+          </g>
+          <text x="403" y="200" fill="#d7e7ff" fontSize="13" textAnchor="middle">//walls</text>
+          <text x="403" y="218" fill="#9fb3d1" fontSize="11" textAnchor="middle">เฉพาะผนัง</text>
+
+          <circle cx="513" cy="143" r="37" fill="#60a5fa" />
+          <text x="513" y="200" fill="#d7e7ff" fontSize="13" textAnchor="middle">//sphere</text>
+          <text x="513" y="218" fill="#9fb3d1" fontSize="11" textAnchor="middle">ทรงกลม</text>
+
+          <polygon points="623,108 585,178 661,178" fill="#60a5fa" />
+          <text x="623" y="200" fill="#d7e7ff" fontSize="13" textAnchor="middle">//pyramid</text>
+          <text x="623" y="218" fill="#9fb3d1" fontSize="11" textAnchor="middle">พีระมิด</text>
+
+          <text x="22" y="240" fill="#7f93b3" fontSize="12">เกิดทันที ไม่กินไอเทม · พลาดแล้วพิมพ์ //undo ย้อนได้</text>
+        </svg>
+        <figcaption className="docP" style={{ fontSize: "0.85rem", opacity: 0.8, marginTop: "0.4rem" }}>
+          หลักการ FAWE — เลือกพื้นที่ที่อยากได้ก่อน แล้วเลือกได้ว่าจะให้บล็อกออกมาเป็นรูปทรงไหน
+        </figcaption>
+      </figure>
+
+      <h3 className="docH3">ขั้นที่ 1 — เลือกพื้นที่ก่อนเสมอ</h3>
+      <span className="cmd">{`//wand              # รับขวานเลือกพื้นที่ (คลิกซ้าย=pos1, คลิกขวา=pos2)
+//pos1  //pos2      # ตั้งจุดเลือกจากตำแหน่งที่ยืน (ไม่ต้องใช้ขวาน)
+//sel  //desel      # ดู / ยกเลิก พื้นที่ที่เลือก
+//expand <n> <ทิศ>  # ขยายพื้นที่เลือก (//contract = หด)`}</span>
+
+      <h3 className="docH3">เติม / แทนที่ / ขึ้นโครง</h3>
+      <span className="cmd">{`//set <block>          # เติมเต็มพื้นที่ (พื้น/ฐานเมือง)
+//replace <เก่า> <ใหม่>  # แทนเฉพาะบล็อกชนิดเดียว
+//walls <block>        # สร้างแค่ 4 ด้านข้าง (กำแพง/ตึก)
+//faces <block>        # 4 ด้าน + พื้น + เพดาน (กล่องปิด)
+//hollow               # ควักไส้ในให้กลวง (ตึกข้างในว่าง)
+//overlay <block>      # โปะทับด้านบนบล็อกเดิม (ปูหญ้าบนภูเขา)`}</span>
+
+      <h3 className="docH3">รูปทรงสำเร็จรูป (ยืนตรงจุดศูนย์กลางแล้วสั่ง)</h3>
+      <span className="cmd">{`//sphere <block> <รัศมี>      # ทรงกลม/โดม (ใส่ -h = กลวง)
+//cyl <block> <รัศมี> <สูง>    # ทรงกระบอก/หอคอย (//hcyl = กลวง)
+//pyramid <block> <ขนาด>      # พีระมิด/หลังคา
+//line <block>   //curve      # เส้นตรง / เส้นโค้ง (ขอบถนน/ราง)`}</span>
+
+      <h3 className="docH3">คัดลอก–วาง &amp; ทำซ้ำ</h3>
+      <span className="cmd">{`//copy   //paste       # คัดลอกสิ่งที่เลือก แล้วแปะที่อื่น
+//rotate <องศา>  //flip  # หมุน / พลิก clipboard ก่อนวาง
+//stack <n> <ทิศ>      # ทำซ้ำต่อกัน n ชุด (กำแพง/รั้ว/รางยาวๆ)
+//move <n> <ทิศ>       # ย้ายสิ่งที่เลือก
+//undo   //redo        # ย้อนกลับ / ทำซ้ำ (พลาดแล้วกู้ได้ทันที)`}</span>
+
+      <h3 className="docH3">Brush — &quot;ปืนพ่นบล็อก&quot; (วาดสด ไม่ต้องเลือกพื้นที่)</h3>
+      <p className="docP">
+        Brush เปลี่ยนไอเทมในมือเป็นหัวพ่น เล็งแล้วคลิกขวาเพื่อสร้างตรงนั้น —
+        เหมาะกับงานออร์แกนิก เช่น ภูเขา เนิน ตกแต่ง
+      </p>
+      <span className="cmd">{`/br sphere <block> <รัศมี>  # พ่นทรงกลม (ปั้นเนินเขา)
+/br smooth <ขนาด>          # พ่นปรับผิวให้เรียบ
+/mask <block>              # ล็อกให้ brush แก้เฉพาะบล็อกที่กำหนด
+//drain <radius>           # ระบายน้ำ/ลาวารอบตัว`}</span>
+
+      <h3 className="docH3">ลำดับงานจริงตอนสร้างเมือง</h3>
+      <ol className="docList">
+        <li>ปรับพื้น: เลือกพื้นที่เมือง → <code>//set grass_block</code></li>
+        <li>กำแพง: เลือกแนวกำแพง → <code>//walls stone_bricks</code> → <code>//expand 6 up</code></li>
+        <li>หอคอยมุม: ยืนกลางมุม → <code>//cyl stone_bricks 4 12</code> → ยอด <code>//pyramid stone_bricks 5</code></li>
+        <li>ถนน: เลือกแนวถนน → <code>//set polished_andesite</code></li>
+        <li>บ้านต้นแบบ: สร้าง 1 หลังด้วยมือ → <code>//copy</code> → ไปจุดอื่น <code>//paste</code> ซ้ำได้เรื่อยๆ</li>
+        <li>พลาดตรงไหน → <code>//undo</code></li>
+      </ol>
+      <div className="note">
+        💡 <strong>//undo คือเพื่อนที่ดีที่สุด</strong> — สั่งผิดเสกบล็อกพังเมือง
+        พิมพ์ <code>//undo</code> ย้อนได้ทันที • คู่มือเต็มพร้อมภาพจริง:{" "}
+        <a href="https://www.planetminecraft.com/blog/fawe-tutorial/" target="_blank" rel="noopener noreferrer">Planet Minecraft FAWE Tutorial</a>{" "}
+        และ{" "}
+        <a href="https://intellectualsites.gitbook.io/fastasyncworldedit/features/main-commands-and-permissions" target="_blank" rel="noopener noreferrer">คู่มือคำสั่งทางการ</a>
+      </div>
 
       <h2 className="docH2" id="npc">🧑‍🌾 NPC (Citizens)</h2>
       <p className="docP">
@@ -243,19 +355,177 @@ export default function LordGuide() {
 /npc command add --player <คำสั่ง>   # คลิกขวาแล้วรันคำสั่งในนามผู้เล่น
 /npc remove                    # ลบ NPC`}</span>
       <div className="note">
-        💡 สิทธิ์ NPC เป็นแบบ server-wide (Crown เชื่อใจ Lord) —
-        โปรดใช้ในเขตเมืองตัวเองหรือพื้นที่ที่ได้รับอนุญาตเท่านั้น
+        💡 จัดการ NPC ได้<strong>เฉพาะในเขตเมืองตัวเอง</strong> — ระบบบล็อกการสร้าง/แก้/ลบ NPC
+        นอกเขตของคุณอัตโนมัติ (และคุณลบ NPC แปลกปลอมในเมืองตัวเองได้ แม้คนอื่นเป็นคนสร้าง)
       </div>
 
-      <h2 className="docH2" id="quests">📜 Quests</h2>
+      <h2 className="docH2" id="treasury">💰 คลังเมือง &amp; เศรษฐกิจ</h2>
       <p className="docP">
-        Lord สร้าง quest ของเมืองตัวเองได้ผ่าน Quest Editor — ตั้งเงื่อนไข
-        ภารกิจ (ฆ่า mob / เก็บของ / ไปสถานที่ / คุยกับ NPC) และรางวัล
-        (ไอเทม / เงิน) ได้เอง
+        ทุกเมืองมี <strong>คลังเมือง (City Treasury)</strong> — กระเป๋ากลางของเมืองที่ใช้จ่าย
+        รางวัลเควสให้ลูกเมือง. กฎเหล็ก: <strong>เงินในคลังถอนเข้ากระเป๋าตัวเองไม่ได้</strong> —
+        ออกได้ทางเดียวคือจ่ายเป็นรางวัลเควส (กันเงินเฟ้อ + กันโกง)
       </p>
-      <span className="cmd">{`/quests editor          # เปิด Quest Editor
-/quests list            # ดู quest ทั้งหมด
-/quests stats <ผู้เล่น>  # ดูสถิติ quest ของผู้เล่น`}</span>
+
+      <figure className="docFigure" style={{ margin: "1.25rem 0" }}>
+        <svg width="100%" viewBox="0 0 680 210" role="img"
+          aria-label="การไหลของเงินในคลังเมือง: รายรับเข้าคลัง แล้วออกเป็นรางวัลเควสเท่านั้น" style={{ display: "block" }}>
+          <defs>
+            <marker id="trArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#7f93b3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </marker>
+          </defs>
+          <rect x="1" y="1" width="678" height="208" rx="14" fill="rgba(15,23,39,0.5)" stroke="#1b2a44" />
+          <text x="22" y="30" fill="#f1c40f" fontSize="16" fontWeight="500">เงินเข้าคลัง → ออกเป็นรางวัลเควสเท่านั้น</text>
+
+          <g fontSize="12">
+            <rect x="20" y="48" width="150" height="26" rx="6" fill="rgba(52,211,153,0.12)" stroke="#2e7d5b" />
+            <text x="30" y="65" fill="#d7e7ff">💠 Seed 100,000A</text>
+            <rect x="20" y="80" width="150" height="26" rx="6" fill="rgba(52,211,153,0.12)" stroke="#2e7d5b" />
+            <text x="30" y="97" fill="#d7e7ff">🪙 ภาษีเข้าเมือง</text>
+            <rect x="20" y="112" width="150" height="26" rx="6" fill="rgba(52,211,153,0.12)" stroke="#2e7d5b" />
+            <text x="30" y="129" fill="#d7e7ff">🏪 ภาษีร้านค้า + AStore</text>
+            <rect x="20" y="144" width="150" height="26" rx="6" fill="rgba(52,211,153,0.12)" stroke="#2e7d5b" />
+            <text x="30" y="161" fill="#d7e7ff">👑 Crown grant</text>
+          </g>
+          <line x1="174" y1="109" x2="258" y2="109" stroke="#7f93b3" strokeWidth="2" markerEnd="url(#trArrow)" />
+
+          <rect x="262" y="74" width="150" height="70" rx="10" fill="rgba(241,196,15,0.12)" stroke="#f1c40f" />
+          <text x="337" y="105" fill="#f1c40f" fontSize="22" textAnchor="middle">🏛️</text>
+          <text x="337" y="128" fill="#f1c40f" fontSize="13" textAnchor="middle">คลังเมือง</text>
+
+          <line x1="416" y1="109" x2="494" y2="109" stroke="#7f93b3" strokeWidth="2" markerEnd="url(#trArrow)" />
+          <rect x="498" y="86" width="160" height="46" rx="10" fill="rgba(52,211,153,0.15)" stroke="#34d399" />
+          <text x="578" y="107" fill="#34d399" fontSize="13" textAnchor="middle">📜 รางวัลเควส</text>
+          <text x="578" y="123" fill="#9fb3d1" fontSize="11" textAnchor="middle">→ จ่ายผู้เล่น</text>
+
+          <text x="262" y="186" fill="#e06c6c" fontSize="12">❌ ถอนเข้ากระเป๋า Lord ไม่ได้ — ไม่มีคำสั่งนั้นอยู่จริง</text>
+        </svg>
+        <figcaption className="docP" style={{ fontSize: "0.85rem", opacity: 0.8, marginTop: "0.4rem" }}>
+          คลังเมืองเป็นทางเดียว — เงินเข้าได้หลายทาง แต่ออกได้เฉพาะเป็นรางวัลเควส (ไม่เข้ากระเป๋าตัวเอง)
+        </figcaption>
+      </figure>
+
+      <h3 className="docH3">คลังเติมจากไหน</h3>
+      <ul className="docList">
+        <li><strong>Seed 100,000A</strong> ตอนเปิดเมือง (อัตโนมัติ)</li>
+        <li><strong>ภาษีเข้าเมือง</strong> — เก็บคนนอกที่เดินข้ามเขตเข้าเมือง (ชาวเมือง + รถไฟจ่ายตอนซื้อตั๋ว)</li>
+        <li><strong>ภาษีร้านค้า</strong> — % จากธุรกรรมร้านผู้เล่นในเมือง + commission เมื่อลูกเมืองซื้อจาก AStore</li>
+        <li><strong>Crown grant</strong> — ขอเพิ่มทุนผ่าน Crown (ครั้งละ ≤ 100,000A)</li>
+      </ul>
+
+      <h3 className="docH3">คำสั่งคลัง &amp; ภาษี (Lord)</h3>
+      <span className="cmd">{`/citytreasury              # ดูยอดคลัง + เรตภาษี ของเมืองที่ยืนอยู่
+/setcitytax <จำนวน>        # ตั้งภาษีเข้าเมือง (0–50A, 0 = ปิด)
+/setshoptax <%>            # ตั้งภาษีร้านค้าผู้เล่น (0–10%)`}</span>
+      <div className="note">
+        💡 ดูคลังจาก Discord ได้: <code>/gm-mc-city-treasury</code> (เห็นทุกเมืองที่คุณเป็นเจ้าของ) •
+        โบนัสตอนเป็น Lord ครั้งแรก: <strong>25,000A + Starter Kit</strong> เข้ากระเป๋าส่วนตัว (ครั้งเดียวตลอดชีวิต)
+      </div>
+
+      <h2 className="docH2" id="quests">📜 สร้างเควสเมือง — Step by Step</h2>
+      <p className="docP">
+        Lord สร้างเควสให้เมืองตัวเองได้ โดยเควส<strong>ผูกกับ NPC</strong> ที่คุณวาง —
+        ผู้เล่นต้องมา<strong>คลิกรับที่ NPC ตัวนั้นเท่านั้น</strong> รางวัลหักจากคลังเมือง
+      </p>
+
+      <figure className="docFigure" style={{ margin: "1.25rem 0" }}>
+        <svg width="100%" viewBox="0 0 680 170" role="img"
+          aria-label="วงจรเควสเมือง 5 ขั้น: Lord วาง NPC, ขอเปิดเควส, Crown อนุมัติ, ผู้เล่นรับที่ NPC, ได้รางวัลจากคลัง" style={{ display: "block" }}>
+          <defs>
+            <marker id="qArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="#7f93b3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </marker>
+          </defs>
+          <rect x="1" y="1" width="678" height="168" rx="14" fill="rgba(15,23,39,0.5)" stroke="#1b2a44" />
+          <text x="22" y="28" fill="#f1c40f" fontSize="15" fontWeight="500">วงจรเควสเมือง — ผู้เล่นรับได้ที่ NPC เท่านั้น</text>
+
+          <g>
+            <rect x="14" y="44" width="110" height="86" rx="10" fill="rgba(15,23,39,0.7)" stroke="#1b2a44" />
+            <circle cx="32" cy="62" r="11" fill="#f1c40f" /><text x="32" y="66" fill="#0b1220" fontSize="12" fontWeight="500" textAnchor="middle">1</text>
+            <text x="69" y="86" fontSize="20" textAnchor="middle">🧑</text>
+            <text x="69" y="108" fill="#d7e7ff" fontSize="11" textAnchor="middle">วาง NPC</text>
+            <text x="69" y="122" fill="#9fb3d1" fontSize="10" textAnchor="middle">ในเมือง</text>
+
+            <rect x="146" y="44" width="110" height="86" rx="10" fill="rgba(15,23,39,0.7)" stroke="#1b2a44" />
+            <circle cx="164" cy="62" r="11" fill="#f1c40f" /><text x="164" y="66" fill="#0b1220" fontSize="12" fontWeight="500" textAnchor="middle">2</text>
+            <text x="201" y="86" fontSize="20" textAnchor="middle">📜</text>
+            <text x="201" y="108" fill="#d7e7ff" fontSize="11" textAnchor="middle">ขอเปิดเควส</text>
+            <text x="201" y="122" fill="#9fb3d1" fontSize="10" textAnchor="middle">/requestquest</text>
+
+            <rect x="278" y="44" width="110" height="86" rx="10" fill="rgba(15,23,39,0.7)" stroke="#1b2a44" />
+            <circle cx="296" cy="62" r="11" fill="#f1c40f" /><text x="296" y="66" fill="#0b1220" fontSize="12" fontWeight="500" textAnchor="middle">3</text>
+            <text x="333" y="86" fontSize="20" textAnchor="middle">👑</text>
+            <text x="333" y="108" fill="#d7e7ff" fontSize="11" textAnchor="middle">Crown สร้าง</text>
+            <text x="333" y="122" fill="#9fb3d1" fontSize="10" textAnchor="middle">+ อนุมัติ</text>
+
+            <rect x="410" y="44" width="110" height="86" rx="10" fill="rgba(15,23,39,0.7)" stroke="#1b2a44" />
+            <circle cx="428" cy="62" r="11" fill="#f1c40f" /><text x="428" y="66" fill="#0b1220" fontSize="12" fontWeight="500" textAnchor="middle">4</text>
+            <text x="465" y="86" fontSize="20" textAnchor="middle">🧍</text>
+            <text x="465" y="108" fill="#d7e7ff" fontSize="11" textAnchor="middle">รับที่ NPC</text>
+            <text x="465" y="122" fill="#9fb3d1" fontSize="10" textAnchor="middle">คลิกขวา</text>
+
+            <rect x="542" y="44" width="110" height="86" rx="10" fill="rgba(52,211,153,0.13)" stroke="#34d399" />
+            <circle cx="560" cy="62" r="11" fill="#34d399" /><text x="560" y="66" fill="#0b1220" fontSize="12" fontWeight="500" textAnchor="middle">5</text>
+            <text x="597" y="86" fontSize="20" textAnchor="middle">💰</text>
+            <text x="597" y="108" fill="#34d399" fontSize="11" textAnchor="middle">ได้รางวัล</text>
+            <text x="597" y="122" fill="#9fb3d1" fontSize="10" textAnchor="middle">จากคลัง</text>
+          </g>
+          <line x1="126" y1="87" x2="144" y2="87" stroke="#7f93b3" strokeWidth="2" markerEnd="url(#qArrow)" />
+          <line x1="258" y1="87" x2="276" y2="87" stroke="#7f93b3" strokeWidth="2" markerEnd="url(#qArrow)" />
+          <line x1="390" y1="87" x2="408" y2="87" stroke="#7f93b3" strokeWidth="2" markerEnd="url(#qArrow)" />
+          <line x1="522" y1="87" x2="540" y2="87" stroke="#7f93b3" strokeWidth="2" markerEnd="url(#qArrow)" />
+          <text x="22" y="158" fill="#7f93b3" fontSize="11">รับจากที่อื่น (/quests take จากไกล) = ระบบบล็อก — ต้องมาที่ NPC เท่านั้น</text>
+        </svg>
+        <figcaption className="docP" style={{ fontSize: "0.85rem", opacity: 0.8, marginTop: "0.4rem" }}>
+          วงจรเควสเมือง — Lord วาง NPC → ขอเปิดเควส → Crown สร้าง+อนุมัติ → ผู้เล่นมารับที่ NPC → ได้รางวัลจากคลัง
+        </figcaption>
+      </figure>
+
+      <ol className="stepList">
+        <li className="step">
+          <div className="stepTitle">วาง NPC &quot;กระดานเควส&quot; ในเมือง <span className="badgeGame">IN-GAME</span></div>
+          <div className="stepBody">
+            ยืนในเขตเมืองตัวเอง สร้าง NPC แล้วเลือกให้มันถูก select อยู่:
+            <span className="cmd">{`/npc create QuestBoard      # สร้าง NPC (ได้เฉพาะในเขตเมืองคุณ)
+/npc select                 # เลือก NPC ตัวนั้น (หรือคลิกที่ NPC)`}</span>
+          </div>
+        </li>
+        <li className="step">
+          <div className="stepTitle">ขอเปิดเควส — ผูกกับ NPC ที่เลือก <span className="badgeGame">IN-GAME</span></div>
+          <div className="stepBody">
+            objective กับ reward คั่นด้วย <code>|</code> — ระบบจับ NPC ที่คุณเลือกไว้อัตโนมัติ:
+            <span className="cmd">/requestquest dragon_hunt ฆ่ามังกร 1 ตัว | 200A + diamond</span>
+            คำขอจะถูกส่งไปให้ Crown อนุมัติบน Discord (โพสต์อัตโนมัติ)
+          </div>
+        </li>
+        <li className="step">
+          <div className="stepTitle">Crown สร้างเควสจริง + อนุมัติ <span className="badgeDiscord">CROWN</span></div>
+          <div className="stepBody">
+            Crown สร้างเควสใน <code>/quests editor</code> (ใช้ <code>questId</code> เดียวกับที่ขอ) ตั้งภารกิจ +
+            รางวัล + ผูก NPC id นั้น แล้วกดปุ่ม <strong>อนุมัติ</strong> บน Discord → เควสลงทะเบียนกับเมือง
+            <br /><em>เงินรางวัล ≤ เพดาน · ห้ามใส่ command/permission reward (ระบบบังคับ)</em>
+          </div>
+        </li>
+        <li className="step">
+          <div className="stepTitle">ผู้เล่นมารับเควสที่ NPC <span className="badgeGame">PLAYER</span></div>
+          <div className="stepBody">
+            ลูกเมืองเดินมา<strong>คลิกขวา NPC กระดานเควส</strong> → รับเควส. รับจากที่อื่น (เช่น
+            <code>/quests take</code> จากไกลๆ) <strong>ไม่ได้</strong> — ระบบบังคับให้รับที่ NPC ตัวนั้นเท่านั้น
+          </div>
+        </li>
+        <li className="step">
+          <div className="stepTitle">ทำสำเร็จ → คลังจ่ายรางวัลอัตโนมัติ</div>
+          <div className="stepBody">
+            เมื่อทำเควสจบ ระบบหักรางวัลจาก<strong>คลังเมือง</strong>แล้วจ่ายให้ผู้เล่น —
+            ถ้าคลังไม่พอ เควสค้างไว้จนเติมคลัง (ไม่มีการพิมพ์เงินใหม่ — กันเงินเฟ้อ)
+          </div>
+        </li>
+      </ol>
+      <div className="note noteGold">
+        🎯 ทางลัด: ขอเปิดเควสผ่าน Discord ได้ด้วย <code>/gm-mc-quest-request</code> (แบบไม่ผูก NPC —
+        รับที่ไหนก็ได้) แต่ flow ผูก NPC ในเกมเหมาะกับ &quot;กระดานเควสประจำเมือง&quot; มากกว่า
+
+      </div>
 
       <h3 className="docH3">โบนัส: ประตูมิติ Nether</h3>
       <p className="docP">
@@ -313,10 +583,14 @@ export default function LordGuide() {
             </tr>
           </thead>
           <tbody>
+            <tr><td><code>/claimcity &lt;ชื่อ&gt; [display]</code></td><td>จองเมืองจาก WorldEdit selection (//sel poly) → ส่ง Crown อนุมัติ</td></tr>
+            <tr><td><code>/citytreasury</code></td><td>ดูยอดคลัง + เรตภาษีของเมืองที่ยืน</td></tr>
+            <tr><td><code>/setcitytax &lt;จำนวน&gt;</code> · <code>/setshoptax &lt;%&gt;</code></td><td>ตั้งภาษีเข้าเมือง / ภาษีร้านค้า</td></tr>
+            <tr><td><code>/setcitywarp</code> · <code>/setcityclerk</code> · <code>/removecityclerk</code></td><td>ตั้งจุดลงรถไฟ / วาง-ลบ NPC ขายตั๋ว (ที่ตำแหน่งที่ยืน)</td></tr>
+            <tr><td><code>/requestquest &lt;id&gt; &lt;ภารกิจ&gt; | &lt;รางวัล&gt;</code></td><td>ขอเปิดเควสผูกกับ NPC ที่เลือก → ส่ง Crown อนุมัติ</td></tr>
             <tr><td><code>/rg info | flag | addmember | removemember</code></td><td>จัดการเขตเมือง</td></tr>
             <tr><td><code>{"//set //replace //copy //paste ..."}</code></td><td>WorldEdit ในเขตเมือง</td></tr>
-            <tr><td><code>/npc create | type | skin | command ...</code></td><td>จัดการ NPC</td></tr>
-            <tr><td><code>/quests editor</code></td><td>สร้าง/แก้ quest</td></tr>
+            <tr><td><code>/npc create | select | type | skin | command ...</code></td><td>จัดการ NPC (ในเขตเมืองตัวเอง)</td></tr>
           </tbody>
         </table>
       </div>

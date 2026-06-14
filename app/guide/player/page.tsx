@@ -25,6 +25,8 @@ export default function PlayerGuide() {
           <a className="tocChip" href="#ranks">🏅 Rank</a>
           <a className="tocChip" href="#travel">🚂 การเดินทาง</a>
           <a className="tocChip" href="#shops">🏪 ร้านค้า</a>
+          <a className="tocChip" href="#cities">🏛️ เข้าเมือง</a>
+          <a className="tocChip" href="#quests">📜 เควส</a>
           <a className="tocChip" href="#commands">⌨️ คำสั่งทั้งหมด</a>
           <a className="tocChip" href="#rules">📏 กฎ Anti-Exploit</a>
           <a className="tocChip" href="#tips">💡 Tips</a>
@@ -224,13 +226,60 @@ export default function PlayerGuide() {
         </li>
         <li className="step">
           <div className="stepTitle">เปิดร้านสำเร็จ</div>
-          <div className="stepBody">มีภาษี 5% ต่อธุรกรรมอัตโนมัติ</div>
+          <div className="stepBody">
+            ตั้งร้านได้<strong>เฉพาะในเขตเมือง</strong>เท่านั้น (นอกเมืองตั้งไม่ได้) —
+            แต่ละเมืองมีภาษีร้านค้าที่เจ้าเมืองตั้งเอง (0–10% เข้าคลังเมือง)
+          </div>
         </li>
       </ol>
       <p className="docP">
         จำนวนร้านสูงสุดตาม Rank: Member 10 → Regular 15 → Veteran 20 →
         Elite/VIP 30 ร้าน
       </p>
+
+      <h2 className="docH2" id="cities">🏛️ เข้าเมืองของ Lord</h2>
+      <p className="docP">
+        เมืองที่ Lord เปิดอาจเก็บ<strong>ภาษีเข้าเมือง</strong>กับคนนอกที่เดินข้ามเขตเข้าไป
+        (เจ้าเมืองตั้งเอง 0–50A) — มีแจ้งเตือนตอนเข้า. ถ้าเดินทางด้วยรถไฟ ภาษีรวมอยู่ในค่าตั๋วแล้ว
+      </p>
+      <div className="note">
+        💡 <strong>ชาวเมืองเข้าฟรี</strong> — ถ้าเป็นเจ้าของหรือสมาชิกเมือง (Lord
+        <code>/rg addmember</code> ให้) ไม่เสียภาษีเข้าเมืองตัวเอง • เงินภาษีเข้า
+        <strong>คลังเมือง</strong> ที่ Lord เอาไปทำรางวัลเควสคืนให้ลูกเมือง
+      </div>
+
+      <h2 className="docH2" id="quests">📜 เควส (Quests)</h2>
+      <p className="docP">
+        เควสคืองานที่ทำแล้วได้รางวัล (เงิน/ไอเทม) — มีทั้งเควสกลางของเซิร์ฟ และ
+        <strong>เควสของเมือง</strong>ที่เจ้าเมือง (Lord) สร้างไว้ รางวัลมาจากคลังเมือง
+      </p>
+      <ol className="stepList">
+        <li className="step">
+          <div className="stepTitle">หาเควส</div>
+          <div className="stepBody">
+            พิมพ์ <code>/quests</code> เปิดสมุดเควส ดูเควสที่มี • หรือมองหา
+            <strong>NPC กระดานเควส</strong>ในเมืองต่างๆ
+          </div>
+        </li>
+        <li className="step">
+          <div className="stepTitle">รับเควส</div>
+          <div className="stepBody">
+            <strong>คลิกขวา NPC กระดานเควส</strong> เพื่อรับ — เควสของเมืองบางอันรับได้
+            <strong>ที่ NPC ตัวนั้นเท่านั้น</strong> (พิมพ์ <code>/quests take</code> จากที่ไกลไม่ได้)
+          </div>
+        </li>
+        <li className="step">
+          <div className="stepTitle">ทำให้สำเร็จ → รับรางวัล</div>
+          <div className="stepBody">
+            ทำภารกิจตามเงื่อนไข เสร็จแล้วได้รางวัลอัตโนมัติ — เงินเควสเป็นรายได้
+            <strong>นอก daily cap</strong>
+          </div>
+        </li>
+      </ol>
+      <div className="note">
+        💡 ดูเควสที่กำลังทำ/สถิติ: <code>/quests</code> • ยกเลิกเควส:{" "}
+        <code>/quests quit &lt;ชื่อ&gt;</code>
+      </div>
 
       <h2 className="docH2" id="commands">⌨️ คำสั่งทั้งหมด</h2>
       <div className="docTableWrap">
