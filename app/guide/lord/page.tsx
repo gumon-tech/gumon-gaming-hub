@@ -455,8 +455,8 @@ export default function LordGuide() {
             <rect x="278" y="44" width="110" height="86" rx="10" fill="rgba(15,23,39,0.7)" stroke="#1b2a44" />
             <circle cx="296" cy="62" r="11" fill="#f1c40f" /><text x="296" y="66" fill="#0b1220" fontSize="12" fontWeight="500" textAnchor="middle">3</text>
             <text x="333" y="86" fontSize="20" textAnchor="middle">👑</text>
-            <text x="333" y="108" fill="#d7e7ff" fontSize="11" textAnchor="middle">Crown สร้าง</text>
-            <text x="333" y="122" fill="#9fb3d1" fontSize="10" textAnchor="middle">+ อนุมัติ</text>
+            <text x="333" y="108" fill="#d7e7ff" fontSize="11" textAnchor="middle">Crown อนุมัติ</text>
+            <text x="333" y="122" fill="#9fb3d1" fontSize="10" textAnchor="middle">สร้างอัตโนมัติ</text>
 
             <rect x="410" y="44" width="110" height="86" rx="10" fill="rgba(15,23,39,0.7)" stroke="#1b2a44" />
             <circle cx="428" cy="62" r="11" fill="#f1c40f" /><text x="428" y="66" fill="#0b1220" fontSize="12" fontWeight="500" textAnchor="middle">4</text>
@@ -477,7 +477,7 @@ export default function LordGuide() {
           <text x="22" y="158" fill="#7f93b3" fontSize="11">รับจากที่อื่น (/quests take จากไกล) = ระบบบล็อก — ต้องมาที่ NPC เท่านั้น</text>
         </svg>
         <figcaption className="docP" style={{ fontSize: "0.85rem", opacity: 0.8, marginTop: "0.4rem" }}>
-          วงจรเควสเมือง — Lord วาง NPC → ขอเปิดเควส → Crown สร้าง+อนุมัติ → ผู้เล่นมารับที่ NPC → ได้รางวัลจากคลัง
+          วงจรเควสเมือง — Lord วาง NPC → ขอเปิดเควส → Crown กดอนุมัติ (เควสสร้างอัตโนมัติ) → ผู้เล่นมารับที่ NPC → ได้รางวัลจากคลัง
         </figcaption>
       </figure>
 
@@ -493,17 +493,19 @@ export default function LordGuide() {
         <li className="step">
           <div className="stepTitle">ขอเปิดเควส — ผูกกับ NPC ที่เลือก <span className="badgeGame">IN-GAME</span></div>
           <div className="stepBody">
-            objective กับ reward คั่นด้วย <code>|</code> — ระบบจับ NPC ที่คุณเลือกไว้อัตโนมัติ:
-            <span className="cmd">/requestquest dragon_hunt ฆ่ามังกร 1 ตัว | 200A + diamond</span>
-            คำขอจะถูกส่งไปให้ Crown อนุมัติบน Discord (โพสต์อัตโนมัติ)
+            ระบุภารกิจแบบมีโครงสร้าง: <code>&lt;questId&gt; &lt;kill|break|place&gt; &lt;เป้าหมาย&gt; &lt;จำนวน&gt; &lt;รางวัล A&gt; [ชื่อ]</code>
+            — ระบบจับ NPC ที่คุณเลือกไว้อัตโนมัติ:
+            <span className="cmd">{`/requestquest zombiecull kill zombie 10 80 Clear the Undead
+# kill mob: zombie · break/place block: เช่น IRON_ORE · รางวัล ≤ 200A หักจากคลัง`}</span>
+            คำขอจะถูกส่งไปให้ Crown อนุมัติบน Discord อัตโนมัติ
           </div>
         </li>
         <li className="step">
-          <div className="stepTitle">Crown สร้างเควสจริง + อนุมัติ <span className="badgeDiscord">CROWN</span></div>
+          <div className="stepTitle">Crown กดอนุมัติ — เควสถูกสร้างอัตโนมัติ <span className="badgeDiscord">CROWN</span></div>
           <div className="stepBody">
-            Crown สร้างเควสใน <code>/quests editor</code> (ใช้ <code>questId</code> เดียวกับที่ขอ) ตั้งภารกิจ +
-            รางวัล + ผูก NPC id นั้น แล้วกดปุ่ม <strong>อนุมัติ</strong> บน Discord → เควสลงทะเบียนกับเมือง
-            <br /><em>เงินรางวัล ≤ เพดาน · ห้ามใส่ command/permission reward (ระบบบังคับ)</em>
+            Crown แค่กดปุ่ม <strong>อนุมัติ</strong> บน Discord → ระบบ<strong>สร้างเควส + เปิดใช้งานทันที</strong>
+            (ไม่ต้องเข้า <code>/quests editor</code> เอง) ผูกกับ NPC + ตั้งรางวัลให้เสร็จ
+            <br /><em>เงินรางวัล ≤ เพดาน 200A · ไม่มี command/permission reward (ระบบสร้างให้เฉพาะ kill/break/place + เงิน)</em>
           </div>
         </li>
         <li className="step">
@@ -522,8 +524,9 @@ export default function LordGuide() {
         </li>
       </ol>
       <div className="note noteGold">
-        🎯 ทางลัด: ขอเปิดเควสผ่าน Discord ได้ด้วย <code>/gm-mc-quest-request</code> (แบบไม่ผูก NPC —
-        รับที่ไหนก็ได้) แต่ flow ผูก NPC ในเกมเหมาะกับ &quot;กระดานเควสประจำเมือง&quot; มากกว่า
+        🎯 ทางลัด: ขอเปิดเควสผ่าน Discord ได้ด้วย <code>/gm-mc-quest-request</code> (เลือก type/target/amount/reward
+        เหมือนกัน แต่ไม่ผูก NPC — รับที่ไหนก็ได้) • Crown กดอนุมัติแล้วเควสถูกสร้างอัตโนมัติเหมือนกัน •
+        flow ผูก NPC ในเกมเหมาะกับ &quot;กระดานเควสประจำเมือง&quot; (มีสัญลักษณ์เหนือหัว NPC) มากกว่า
 
       </div>
 
