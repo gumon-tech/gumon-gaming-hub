@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SHARE_TITLE, SHARE_DESCRIPTION, ORG_NAME, SITE_NAME } from "@/lib/seo";
 import SocialShare from "@/components/SocialShare";
 import HeroActions from "@/components/HeroActions";
@@ -349,6 +350,10 @@ export default function Page() {
             </a>
             <span className="sep">•</span>
             <a href="/guide/">Guides</a>
+            <span className="sep">•</span>
+            <Link href="/terms/">Terms of Service</Link>
+            <span className="sep">•</span>
+            <Link href="/privacy/">Privacy Policy</Link>
           </div>
         </div>
       </footer>

@@ -59,6 +59,10 @@ export default function GuideLayout({
             <span className="sep">•</span>
             <Link href="/guide/">Guides</Link>
             <span className="sep">•</span>
+            <Link href="/terms/">Terms of Service</Link>
+            <span className="sep">•</span>
+            <Link href="/privacy/">Privacy Policy</Link>
+            <span className="sep">•</span>
             <a href={DISCORD_INVITE} target="_blank" rel="noreferrer">
               Discord
             </a>
